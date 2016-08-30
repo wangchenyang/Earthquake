@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="strong">
+        <item>不设防</item>
+        <item>六度设防</item>
+        <item>七度设防</item>
+        <item>八度设防</item>
+        <item>九度设防</item>
+    </string-array>
+    <!--文物保护级别-->
+    <string-array name="protection_level">
+        <item>国家级</item>
+        <item>省级</item>
+        <item>市县级</item>
+    </string-array>
+
+    <!--抗震设防分类等级-->
+    <string-array name="earthquake_level">
+        <item>特殊设防(甲类)</item>
+        <item>重点设防(乙类)</item>
+        <item>标准设防(丙类)</item>
+        <item>适度设防(丁类)</item>
+    </string-array>
+
+    <!--依据的抗震设计规范-->
+    <string-array name="design_standard">
+        <item>74 规范</item>
+        <item>78 规范</item>
+        <item>89 规范</item>
+        <item>2001 规范</item>
+        <item>2010 规范</item>
+    </string-array>
+
+    <!--建筑基础形式-->
+    <string-array name="build_form">
+        <item>条形基础</item>
+        <item>独立基础</item>
+        <item>筏板基础</item>
+        <item>箱型基础</item>
+        <item>桩基础</item>
+    </string-array>
+
+
+    <!--场地类别-->
+    <string-array name="place_type">
+        <item>Ⅰ类</item>
+        <item>Ⅱ类</item>
+        <item>Ⅲ类</item>
+        <item>Ⅳ类</item>
+    </string-array>
+
+    <!--设备和施工资料-->
+    <string-array name="construction_material">
+        <item>齐全</item>
+        <item>基本齐全</item>
+        <item>无</item>
+    </string-array>
+
+    <!--主体结构是否有裂缝-->
+    <string-array name="crack">
+        <item>柱</item>
+        <item>梁</item>
+        <item>墙</item>
+        <item>板</item>
+    </string-array>
+
+</resources>

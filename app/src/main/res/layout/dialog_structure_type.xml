@@ -1,0 +1,154 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:paddingEnd="24dp"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
+    android:paddingStart="24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/ccb_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="6dp"
+            android:paddingStart="6dp"
+            android:paddingTop="8dp"
+            android:text="钢结构"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/ccb_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="6dp"
+            android:paddingStart="6dp"
+            android:paddingTop="8dp"
+            android:text="筒体"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/ccb_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:focusableInTouchMode="false"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="6dp"
+            android:paddingStart="6dp"
+            android:paddingTop="8dp"
+            android:text="框架"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/ccb_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="6dp"
+            android:paddingStart="6dp"
+            android:paddingTop="8dp"
+            android:text="剪力墙"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/ccb_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="6dp"
+            android:paddingStart="6dp"
+            android:paddingTop="8dp"
+            android:text="钢混"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/ccb_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="6dp"
+            android:paddingStart="6dp"
+            android:paddingTop="8dp"
+            android:text="砖混"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/ccb_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="6dp"
+            android:paddingStart="6dp"
+            android:paddingTop="8dp"
+            android:text="砖木"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/ccb_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="6dp"
+                android:paddingStart="6dp"
+                android:paddingTop="8dp"
+                android:text="其他"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/et_other"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="建筑名称"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <EditText
+            android:id="@+id/et_build_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@null"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:hint="请输入建筑名称"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="详细地址"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <EditText
+            android:id="@+id/et_build_address"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@null"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:hint="请输入详细地址"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="邮政编码"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <EditText
+            android:id="@+id/et_postcode"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="请输入邮政编码"
+            android:inputType="number"
+            android:maxLength="6"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="所属街道/地区/乡"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:clickable="true"
+            android:onClick="chooseStreet"
+            android:orientation="horizontal"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:id="@+id/tv_street"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="#313131"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_arrow_drop_down_24dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="所属社区/村委会"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:clickable="true"
+            android:onClick="chooseCommunity"
+            android:orientation="horizontal"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:id="@+id/tv_community"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="#313131"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_arrow_drop_down_24dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="所属小区/村"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <EditText
+            android:id="@+id/et_residential"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@null"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:hint="请输入所属小区或村"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="楼座编号"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <EditText
+            android:id="@+id/et_build_num"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@null"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:hint="请输入楼座编号"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="建筑物高度(M)"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <EditText
+            android:id="@+id/et_build_height"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="请输入建筑物高度"
+            android:inputType="number"
+            android:maxLength="4"
+            android:paddingRight="10dp"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="建筑层数"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:hint="请输入建筑物层数"
+            android:onClick="buildLayers"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="设计单位"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <EditText
+            android:id="@+id/et_design_unit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@null"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:hint="请输入设计单位"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+</LinearLayout>

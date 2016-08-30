@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#5D7B9D"
+        android:orientation="vertical">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:id="@+id/pll_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/main_height"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="建筑名称"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                app:layout_widthPercent="500%h" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="所属街道"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                app:layout_widthPercent="300%h" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="所属社区"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                app:layout_widthPercent="500%h" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="用途"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                app:layout_widthPercent="300%h" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="竣工时间"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                app:layout_widthPercent="300%h" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:id="@+id/pll_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/main_height"
+            android:orientation="horizontal">
+
+            <TextView
+                android:paddingLeft="10dp"
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="建筑名称"
+                android:textColor="#313131"
+                android:textSize="14sp"
+                app:layout_widthPercent="500%h" />
+
+            <TextView
+                android:id="@+id/tv_street"
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="所属街道"
+                android:textColor="#313131"
+                android:textSize="14sp"
+                app:layout_widthPercent="300%h" />
+
+            <TextView
+                android:id="@+id/tv_community"
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="所属社区"
+                android:textColor="#313131"
+                android:textSize="14sp"
+                app:layout_widthPercent="500%h" />
+
+            <TextView
+                android:id="@+id/tv_used"
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="用途"
+                android:textColor="#313131"
+                android:textSize="14sp"
+                app:layout_widthPercent="300%h" />
+
+            <TextView
+                android:id="@+id/tv_end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="竣工时间"
+                android:textColor="#313131"
+                android:textSize="14sp"
+                app:layout_widthPercent="300%h" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+</LinearLayout>

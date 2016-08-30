@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_heightPercent="11%w">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_arrow_back_black_24dp"
+            android:clickable="true"
+            android:onClick="finish"
+            app:layout_heightPercent="90%h"
+            app:layout_marginLeftPercent="10%h"
+            app:layout_widthPercent="90%h" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="查询条件"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            app:layout_marginRightPercent="100%h" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/main_divider" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F5F5F5"
+        android:padding="2dp"
+        android:scrollbarThumbVertical="@android:color/transparent">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.zhy.android.percent.support.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_heightPercent="10%w"
+                app:layout_marginLeftPercent="5%w"
+                app:layout_marginRightPercent="5%w"
+                app:layout_marginTopPercent="3%w">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|end"
+                    android:text="建筑名称"
+                    android:textColor="#333333"
+                    android:textSize="14sp"
+                    app:layout_marginRightPercent="3%w"
+                    app:layout_widthPercent="35%w" />
+
+                <EditText
+                    android:id="@+id/et_build_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_edittext_0px_white"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:singleLine="true"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+            </com.zhy.android.percent.support.PercentLinearLayout>
+
+            <com.zhy.android.percent.support.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_heightPercent="10%w"
+                app:layout_marginLeftPercent="5%w"
+                app:layout_marginRightPercent="5%w"
+                app:layout_marginTopPercent="3%w">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|end"
+                    android:text="现在用途或功能"
+                    android:textColor="#333333"
+                    android:textSize="14sp"
+                    app:layout_marginRightPercent="3%w"
+                    app:layout_widthPercent="35%w" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_edittext_0px_white"
+                    android:paddingLeft="10dp"
+
+                    android:paddingRight="10dp"
+                    android:singleLine="true"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+            </com.zhy.android.percent.support.PercentLinearLayout>
+
+            <com.zhy.android.percent.support.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_heightPercent="10%w"
+                app:layout_marginLeftPercent="5%w"
+                app:layout_marginRightPercent="5%w"
+                app:layout_marginTopPercent="3%w">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|end"
+                    android:text="所属街道/地区/乡"
+                    android:textColor="#333333"
+                    android:textSize="14sp"
+                    app:layout_marginRightPercent="3%w"
+                    app:layout_widthPercent="35%w" />
+
+                <TextView
+                    android:id="@+id/et_real_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_edittext_0px_white"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:singleLine="true"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+            </com.zhy.android.percent.support.PercentLinearLayout>
+
+            <com.zhy.android.percent.support.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_heightPercent="10%w"
+                app:layout_marginLeftPercent="5%w"
+                app:layout_marginRightPercent="5%w"
+                app:layout_marginTopPercent="3%w">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|end"
+                    android:text="所属社区/村委会"
+                    android:textColor="#333333"
+                    android:textSize="14sp"
+                    app:layout_marginRightPercent="3%w"
+                    app:layout_widthPercent="35%w" />
+
+                <TextView
+                    android:id="@+id/et_tel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_edittext_0px_white"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:singleLine="true"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+            </com.zhy.android.percent.support.PercentLinearLayout>
+
+            <com.zhy.android.percent.support.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_heightPercent="10%w"
+                app:layout_marginLeftPercent="5%w"
+                app:layout_marginRightPercent="5%w"
+                app:layout_marginTopPercent="3%w">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|end"
+                    android:text="建筑物高度"
+                    android:textColor="#333333"
+                    android:textSize="14sp"
+                    app:layout_marginRightPercent="3%w"
+                    app:layout_widthPercent="35%w" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_edittext_0px_white">
+
+                    <EditText
+                        android:id="@+id/et_min_hold_height"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:text="21"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="至"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_max_hold_height"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:text="21"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+            </com.zhy.android.percent.support.PercentLinearLayout>
+
+            <com.zhy.android.percent.support.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_heightPercent="10%w"
+                app:layout_marginLeftPercent="5%w"
+                app:layout_marginRightPercent="5%w"
+                app:layout_marginTopPercent="3%w">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|end"
+                    android:text="地上建筑层数"
+                    android:textColor="#333333"
+                    android:textSize="14sp"
+                    app:layout_marginRightPercent="3%w"
+                    app:layout_widthPercent="35%w" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_edittext_0px_white">
+
+                    <EditText
+                        android:id="@+id/et_min_build_floor"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:text="21"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="至"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_max_build_floor"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:text="21"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </com.zhy.android.percent.support.PercentLinearLayout>
+
+            <com.zhy.android.percent.support.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_heightPercent="10%w"
+                app:layout_marginLeftPercent="5%w"
+                app:layout_marginRightPercent="5%w"
+                app:layout_marginTopPercent="3%w">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|end"
+                    android:text="竣工时间"
+                    android:textColor="#333333"
+                    android:textSize="14sp"
+                    app:layout_marginRightPercent="3%w"
+                    app:layout_widthPercent="35%w" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_edittext_0px_white">
+
+                    <EditText
+                        android:id="@+id/et_min_end_time"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:text="21"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="至"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_max_end_time"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:text="21"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </com.zhy.android.percent.support.PercentLinearLayout>
+
+            <com.zhy.android.percent.support.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_heightPercent="10%w"
+                app:layout_marginLeftPercent="5%w"
+                app:layout_marginRightPercent="5%w"
+                app:layout_marginTopPercent="3%w">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|end"
+                    android:text="常住人数"
+                    android:textColor="#333333"
+                    android:textSize="14sp"
+                    app:layout_marginRightPercent="3%w"
+                    app:layout_widthPercent="35%w" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_edittext_0px_white">
+
+                    <EditText
+                        android:id="@+id/et_min_live_num"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:text="21"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="至"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_max_live_num"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:text="21"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </com.zhy.android.percent.support.PercentLinearLayout>
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_press_blue_6px"
+                android:clickable="true"
+                android:onClick="submit"
+                android:text="查询"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                app:layout_heightPercent="11%w"
+                app:layout_marginBottomPercent="7%w"
+                app:layout_marginLeftPercent="25%w"
+                app:layout_marginRightPercent="25%w"
+                app:layout_marginTopPercent="7%w" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+    </ScrollView>
+</com.zhy.android.percent.support.PercentLinearLayout>

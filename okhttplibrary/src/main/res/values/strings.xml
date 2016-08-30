@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Okhttplibrary</string>
+    <string name="please_wait">请求中...</string>
+    <string name="progress_dialog"></string>
+</resources>

@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="有无坠落危险物"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <RadioGroup
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+
+                android:text="无" />
+
+            <RadioButton
+
+                android:id="@+id/rb_have_fall_hazard"
+                android:layout_width="wrap_content"
+
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:checked="true"
+                android:text="有" />
+
+            <TextView
+                android:id="@+id/tv_fall_hazard"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="无钢筋烟筒"
+                android:textColor="#313131"
+                android:textSize="14sp" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="是否进行过抗震加固"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <RadioGroup
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+
+                android:text="否" />
+
+            <RadioButton
+
+                android:id="@+id/rb_have_reinforce"
+                android:layout_width="wrap_content"
+
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:checked="true"
+                android:text="是" />
+
+
+        </RadioGroup>
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="抗震加固时间"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <EditText
+            android:id="@+id/et_reinforce_time"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@null"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="#313131"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="是否被鉴定为危房"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <RadioGroup
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+
+                android:text="否" />
+
+            <RadioButton
+
+                android:id="@+id/rb_appraisal_dangerous"
+                android:layout_width="wrap_content"
+
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:checked="true"
+                android:text="是" />
+
+
+        </RadioGroup>
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="鉴定单位"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <EditText
+            android:id="@+id/et_appraisal_unit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@null"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="#313131"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="主体结构是否有裂缝"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <RadioGroup
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+
+                android:text="无" />
+
+            <RadioButton
+
+                android:id="@+id/rb_have_crack"
+                android:layout_width="wrap_content"
+
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:checked="true"
+                android:text="有" />
+
+            <TextView
+                android:id="@+id/tv_crack"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="墙"
+                android:textColor="#313131"
+                android:textSize="14sp" />
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="裂缝情况"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <EditText
+            android:id="@+id/et_crack_condition"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@null"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:text=" "
+            android:textColor="#313131"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="平面是方形或矩形"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+
+        <RadioGroup
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_is_rect"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:checked="true"
+                android:text="是" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:text="否" />
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="立面不规则"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <RadioGroup
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_is_rule"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:checked="true"
+                android:text="是" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:text="否" />
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/main_height"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="原照片"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1.5"
+            android:gravity="center_vertical"
+            android:paddingRight="10dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_positive"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="#123123" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="正面"
+                    android:textColor="#313131"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_side"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="#123123" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="侧面"
+                    android:textColor="#313131"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="#123123" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="背面"
+                    android:textColor="#313131"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_press_blue_6px"
+            android:clickable="true"
+            android:onClick="submit"
+            android:text="提交"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            app:layout_heightPercent="11%w"
+            app:layout_marginBottomPercent="7%w"
+            app:layout_marginLeftPercent="25%w"
+            app:layout_marginRightPercent="25%w"
+            app:layout_marginTopPercent="7%w" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+</LinearLayout>

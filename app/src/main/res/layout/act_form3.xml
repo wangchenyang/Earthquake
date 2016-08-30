@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="抗震设防分类等级"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <TextView
+            android:id="@+id/tv_strong_level"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:hint="请选择分类等级"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:onClick="strongLevel"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="依据的抗震设计规范"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:id="@+id/tv_strong_standard"
+            android:clickable="true"
+            android:hint="请选择设计规范"
+            android:gravity="center_vertical"
+            android:onClick="strongStandard"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="建筑基础形式"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:onClick="buildForm"
+            android:id="@+id/tv_build_form"
+            android:hint="请选择建筑基础形式"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="结构类型"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:onClick="structureType"
+            android:singleLine="true"
+            android:hint="请选择结构类型"
+            android:id="@+id/tv_structure_type"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="墙体材料"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:onClick="wallMaterial"
+            android:hint="请选择墙体材料"
+            android:id="@+id/tv_wall_material"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="是否有圈梁"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <RadioGroup
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_have_ring_beam"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="有" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:text="无" />
+        </RadioGroup>
+
+
+
+
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="是否有构造柱"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+
+        <RadioGroup
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_have_structural_column"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="有" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:text="无" />
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="楼顶类型"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center_vertical"
+            android:text=""
+            android:clickable="true"
+            android:onClick="buildTopType"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="场地类别"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:onClick="fieldType"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="设施和施工资料"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+
+        <include layout="@layout/view_line_vertical" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center_vertical"
+           android:clickable="true"
+            android:onClick="facilities"
+            android:textColor="#313131"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <include layout="@layout/view_line_horizontal" />
+
+</LinearLayout>
