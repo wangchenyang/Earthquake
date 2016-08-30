@@ -65,4 +65,13 @@
         <item>板</item>
     </string-array>
 
+    <string-array name="image1">
+        <item>上传</item>
+    </string-array>
+    <string-array name="image2">
+        <item>预览</item>
+        <item>删除</item>
+        <item>墙重新上传</item>
+    </string-array>
+
 </resources>

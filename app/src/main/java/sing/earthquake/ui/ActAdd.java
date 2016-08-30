@@ -38,7 +38,7 @@ import sing.earthquake.common.streetinfo.StreetInfo;
 import sing.earthquake.util.FormUtil;
 import sing.earthquake.util.ToastUtil;
 
-public class ActAdd extends BaseActivity {
+public class ActAdd extends BaseActivity implements View.OnClickListener {
 
     private Activity context;
 
@@ -109,33 +109,39 @@ public class ActAdd extends BaseActivity {
     /** 请选择设施和施工材料 */
     private TextView tvFacilities;
     /** 有无坠落危险物 */
-    private RadioButton rb_have_fall_hazard;
+    private RadioButton rbHaveFallHazard;
+    private RadioButton rbNoHaveFallHazard;
     /** 坠落危险物名 */
-    private TextView tv_fall_hazard;
+    private TextView tvFallHazard;
     /** 是否进行过抗震加固 */
-    private RadioButton rb_have_reinforce;
+    private RadioButton rbHaveReinforce;
+    private RadioButton rbNoHaveReinforce;
     /** 加固时间 */
-    private EditText et_reinforce_time;
+    private EditText etReinforceTime;
     /** 是否鉴定为危房 */
-    private RadioButton rb_appraisal_dangerous;
+    private RadioButton rbAppraisalDangerous;
+    private RadioButton rbNoAppraisalDangerous;
     /** 鉴定单位 */
-    private EditText et_appraisal_unit;
+    private EditText etAppraisalUnit;
     /** 主体结构是否有裂缝 */
-    private RadioButton rb_have_crack;
+    private RadioButton rbHaveCrack;
+    private RadioButton rbNoHaveCrack;
     /** 裂缝位置 */
-    private TextView tv_crack;
+    private TextView tvCrack;
     /** 裂缝情况 */
-    private EditText et_crack_condition;
+    private EditText etCrackCondition;
     /** 平面是方形或矩形 */
-    private RadioButton rb_is_rect;
+    private RadioButton rbIsRect;
+    private RadioButton rbIsNoRect;
     /** 立面是否规则 */
-    private RadioButton rb_is_rule;
+    private RadioButton rbIsRule;
+    private RadioButton rbIsNoRule;
     /** 正面图 */
-    private ImageView iv_positive;
+    private ImageView ivPositive;
     /** 侧面图 */
-    private ImageView iv_side;
+    private ImageView ivSide;
     /** 背面图 */
-    private ImageView iv_back;
+    private ImageView ivBack;
 
     private BuildBean bean;
 
@@ -185,7 +191,31 @@ public class ActAdd extends BaseActivity {
         tvBuildTopType = (TextView) findViewById(R.id.tv_build_top_type);
         tvFieldType = (TextView) findViewById(R.id.tv_field_type);
         tvFacilities = (TextView) findViewById(R.id.tv_facilities);
-
+        rbHaveFallHazard = (RadioButton) findViewById(R.id.rb_have_fall_hazard);
+        rbNoHaveFallHazard = (RadioButton) findViewById(R.id.rb_no_have_fall_hazard);
+        tvFallHazard = (TextView) findViewById(R.id.tv_fall_hazard);
+        isFallHazard();//设置监听
+        rbHaveReinforce = (RadioButton) findViewById(R.id.rb_have_reinforce);
+        rbNoHaveReinforce = (RadioButton) findViewById(R.id.rb_no_have_reinforce);
+        etReinforceTime = (EditText) findViewById(R.id.et_reinforce_time);
+        rbAppraisalDangerous = (RadioButton) findViewById(R.id.rb_appraisal_dangerous);
+        rbNoAppraisalDangerous = (RadioButton) findViewById(R.id.rb_no_appraisal_dangerous);
+        etAppraisalUnit = (EditText) findViewById(R.id.et_appraisal_unit);
+        rbHaveCrack = (RadioButton) findViewById(R.id.rb_have_crack);
+        rbNoHaveCrack = (RadioButton) findViewById(R.id.rb_no_have_crack);
+        tvCrack = (TextView) findViewById(R.id.tv_crack);
+        isCrack();//设置监听
+        etCrackCondition = (EditText) findViewById(R.id.et_crack_condition);
+        rbIsRect = (RadioButton) findViewById(R.id.rb_is_rect);
+        rbIsNoRect = (RadioButton) findViewById(R.id.rb_is_no_rect);
+        rbIsRule = (RadioButton) findViewById(R.id.rb_is_rule);
+        rbIsNoRule = (RadioButton) findViewById(R.id.rb_is_no_rule);
+        ivPositive = (ImageView) findViewById(R.id.iv_positive);
+        ivSide = (ImageView) findViewById(R.id.iv_side);
+        ivBack = (ImageView) findViewById(R.id.iv_back);
+        ivPositive.setOnClickListener(this);
+        ivSide.setOnClickListener(this);
+        ivBack.setOnClickListener(this);
     }
 
 
@@ -260,6 +290,40 @@ public class ActAdd extends BaseActivity {
         bean.setLdlx(tvBuildTopType.getText().toString().trim());//楼顶类型
         bean.setCdlx(tvFieldType.getText().toString().trim());//场地类别
         bean.setSgzl(tvFacilities.getText().toString().trim());//设施和施工材料
+        if (rbNoHaveFallHazard.isChecked()){//坠落危险物
+            bean.setZzwxw("无");
+        }else if(rbHaveFallHazard.isChecked() && !TextUtils.isEmpty(tvFallHazard.getText().toString())){
+            bean.setZzwxw(tvFallHazard.getText().toString());
+        }
+        if (rbHaveReinforce.isChecked() ){// 是否抗震加固
+            bean.setSfjgkzjg("是");
+        }else if(rbNoHaveReinforce.isChecked()){
+            bean.setSfjgkzjg("否");
+        }
+        bean.setKzjgsj(etReinforceTime.getText().toString().trim());//抗震加固时间
+        if (rbNoAppraisalDangerous.isChecked()){//是否危房
+            bean.setShifouweifang("否");
+        }else if(rbAppraisalDangerous.isChecked()){
+            bean.setShifouweifang("是");
+        }
+        bean.setJiandingdanwei(etAppraisalUnit.getText().toString().trim());//鉴定单位
+        if (rbNoHaveCrack.isChecked()){//裂缝
+            bean.setZtjglf("无");
+        }else if (rbHaveCrack.isChecked()){
+            bean.setZtjglf(tvCrack.getText().toString().trim());
+        }
+        bean.setZtjglfqk(etCrackCondition.getText().toString().trim());//裂缝情况
+        if (rbIsRect.isChecked()){//平面是放行或矩形
+            bean.setPmgz("是");
+        }else if(rbIsNoRect.isChecked()){
+            bean.setPmgz("否");
+        }
+        if (rbIsRule.isChecked()){//里面是否规则
+            bean.setPmgz("是");
+        }else if (rbIsNoRule.isChecked()){
+            bean.setPmgz("否");
+         }
+
     }
 
     /**
@@ -645,5 +709,137 @@ public class ActAdd extends BaseActivity {
                 .show();
     }
 
+    /**
+     * 坠落危险物
+     */
+    private void isFallHazard() {
+        tvFallHazard.setVisibility(View.GONE);
+        rbNoHaveFallHazard.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                tvFallHazard.setText("");
+                tvFallHazard.setVisibility(View.GONE);
+            }
+        });
+        rbHaveFallHazard.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                showFallHazard();
+            }
+        });
+        tvFallHazard.setOnClickListener(v -> showFallHazard());
+    }
+    private void showFallHazard() {
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_dangerous, null);
+        final EditText etOther = (EditText) view.findViewById(R.id.et_other);
+        etOther.setVisibility(View.GONE);
+        final List<AppCompatCheckBox> list = FormUtil.getDangerous(view, etOther);
 
+        new MaterialDialog.Builder(this)
+                .title("有无坠落危险物")
+                .customView(view, true)
+                .positiveText(android.R.string.ok)
+                .negativeText(android.R.string.cancel)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        StringBuffer a = new StringBuffer();
+                        for (int i = 0; i < list.size() - 1; i++) {
+                            if (list.get(i).isChecked()) {
+                                a.append(list.get(i).getText().toString() + ",");
+                            }
+                        }
+                        if (list.get(list.size() - 1).isChecked()) {
+                            if (TextUtils.isEmpty(etOther.getText().toString())) {
+                                a.append(list.get(list.size() - 1).getText().toString() + ",");
+                            } else {
+                                a.append(etOther.getText().toString() + ",");
+                            }
+                        }
+                        tvFallHazard.setText(a.toString());
+                        tvFallHazard.setVisibility(View.VISIBLE);
+                    }
+                }).build()
+                .show();
+    }
+
+    /**
+     * 主体结构裂缝
+     */
+    private void isCrack() {
+        tvCrack.setVisibility(View.GONE);
+        rbNoHaveCrack.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                tvCrack.setText("");
+                tvCrack.setVisibility(View.GONE);
+            }
+        });
+        rbHaveCrack.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                showCrack();
+            }
+        });
+        tvCrack.setOnClickListener(v -> showCrack());
+    }
+    Integer[] crack = new Integer[]{};
+    private void showCrack() {
+            new MaterialDialog.Builder(this)
+                    .title("主体结构是否有裂缝")
+                    .items(R.array.crack)
+                    .itemsCallbackMultiChoice(crack, (dialog, which1, text) -> {
+                        crack = which1;
+                        StringBuffer a = new StringBuffer();
+                        for (int i = 0; i < text.length; i++) {
+                            a.append(text[i] + ",");
+                        }
+                        tvCrack.setText(a.toString());
+                        tvCrack.setVisibility(View.VISIBLE);
+                        return true;
+                    })
+                    .positiveText(android.R.string.ok)
+                    .alwaysCallMultiChoiceCallback()
+                    .show();
+    }
+
+    int a = R.array.image1;
+    int b = R.array.image2;
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_positive:
+                new MaterialDialog.Builder(this)
+                        .items(a)
+                        .itemsCallback(new MaterialDialog.ListCallback() {
+                            @Override
+                            public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+
+                            }
+                        })
+                        .show();
+                break;
+            case R.id.iv_side:
+                new MaterialDialog.Builder(this)
+                        .items(b)
+                        .itemsCallback(new MaterialDialog.ListCallback() {
+                            @Override
+                            public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+
+                            }
+                        })
+                        .show();
+                break;
+            case R.id.iv_back:
+                new MaterialDialog.Builder(this)
+                        .items(a)
+                        .itemsCallback(new MaterialDialog.ListCallback() {
+                            @Override
+                            public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+
+                            }
+                        })
+                        .show();
+                break;
+        }
+
+
+
+    }
 }

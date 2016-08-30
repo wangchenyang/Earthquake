@@ -29,21 +29,18 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/rb_no_have_fall_hazard"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-
                 android:text="无" />
 
             <RadioButton
-
                 android:id="@+id/rb_have_fall_hazard"
                 android:layout_width="wrap_content"
-
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
-                android:checked="true"
                 android:text="有" />
 
             <TextView
@@ -83,21 +80,18 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/rb_no_have_reinforce"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-
                 android:text="否" />
 
             <RadioButton
-
                 android:id="@+id/rb_have_reinforce"
                 android:layout_width="wrap_content"
-
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
-                android:checked="true"
                 android:text="是" />
 
 
@@ -132,7 +126,6 @@
             android:gravity="center_vertical"
             android:paddingRight="10dp"
             android:singleLine="true"
-            android:text=""
             android:textColor="#313131"
             android:textSize="14sp" />
     </LinearLayout>
@@ -162,23 +155,19 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/rb_no_appraisal_dangerous"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-
                 android:text="否" />
 
             <RadioButton
-
                 android:id="@+id/rb_appraisal_dangerous"
                 android:layout_width="wrap_content"
-
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
-                android:checked="true"
                 android:text="是" />
-
 
         </RadioGroup>
     </LinearLayout>
@@ -209,9 +198,9 @@
             android:background="@null"
             android:ellipsize="end"
             android:gravity="center_vertical"
+            android:hint="请输入鉴定单位"
             android:paddingRight="10dp"
             android:singleLine="true"
-            android:text=""
             android:textColor="#313131"
             android:textSize="14sp" />
     </LinearLayout>
@@ -241,21 +230,18 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/rb_no_have_crack"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-
                 android:text="无" />
 
             <RadioButton
-
                 android:id="@+id/rb_have_crack"
                 android:layout_width="wrap_content"
-
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
-                android:checked="true"
                 android:text="有" />
 
             <TextView
@@ -322,7 +308,6 @@
 
         <include layout="@layout/view_line_vertical" />
 
-
         <RadioGroup
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -335,10 +320,10 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:checked="true"
                 android:text="是" />
 
             <RadioButton
+                android:id="@+id/rb_is_no_rect"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
@@ -378,10 +363,10 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:checked="true"
                 android:text="是" />
 
             <RadioButton
+                android:id="@+id/rb_is_no_rule"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
@@ -431,7 +416,7 @@
                     android:id="@+id/iv_positive"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
-                    android:background="#123123" />
+                    android:background="#e5e5e5" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -455,7 +440,7 @@
                     android:id="@+id/iv_side"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
-                    android:background="#123123" />
+                    android:background="#e5e5e5" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -477,7 +462,7 @@
                     android:id="@+id/iv_back"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
-                    android:background="#123123" />
+                    android:background="#e5e5e5" />
 
                 <TextView
                     android:layout_width="wrap_content"
