@@ -11,6 +11,6 @@ public class Urls {
     public static final String register = common + "/register";
     /** 登陆 */
     public static final String login = common + "/login";
-    /** 获取建筑列表 */
+    /** 获取建筑列表、搜索 */
     public static final String contentList = common + "content/list";
 }

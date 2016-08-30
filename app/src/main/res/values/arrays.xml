@@ -71,7 +71,7 @@
     <string-array name="image2">
         <item>预览</item>
         <item>删除</item>
-        <item>墙重新上传</item>
+        <item>重新上传</item>
     </string-array>
 
 </resources>

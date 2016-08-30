@@ -376,7 +376,7 @@ public class ActAdd extends BaseActivity implements View.OnClickListener {
         StreetAdapter adapter = new StreetAdapter(context,street);
         listview.setAdapter(adapter);
 
-        List<BottomMenuBean> list = StreetInfo.getStreet();
+        List<BottomMenuBean> list = StreetInfo.getCommunity(street +"");
         listview.setOnItemClickListener((parent, view, position, id) -> {
             tvCommunity.setText(list.get(position).content);
             popupWindow.dismiss();

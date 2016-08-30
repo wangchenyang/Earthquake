@@ -2,14 +2,18 @@ package sing.earthquake.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +26,7 @@ import java.util.List;
 import okhttp3.Request;
 import okhttp3.Response;
 import sing.earthquake.R;
+import sing.earthquake.adapter.StreetAdapter;
 import sing.earthquake.common.BaseActivity;
 import sing.earthquake.common.Urls;
 import sing.earthquake.common.butommenu.BottomMenuBean;
@@ -78,16 +83,26 @@ public class ActRegister extends BaseActivity {
      *
      * @param v
      */
+    private int street = 0;//所选的街道
     public void chooseStreet(View v) {
-        LinkageCommontBottomMenu buttonMenu = new LinkageCommontBottomMenu(this);
-        List<BottomMenuBean> list = StreetInfo.getStreet();
-        buttonMenu.setData1(list, tvStreet.getText().toString());
-        buttonMenu.setListener1(bean1 -> {
-            id = bean1.id;
-            tvStreet.setText(bean1.content);
-        });
+        PopupWindow popupWindow;
+        final View view1 = LayoutInflater.from(context).inflate(R.layout.pop_list, null);
+        popupWindow = new PopupWindow(view1, v.getWidth(), v.getHeight() * 6, true);
+        popupWindow.setTouchable(true);
+        popupWindow.setBackgroundDrawable(new ColorDrawable());
+        popupWindow.showAsDropDown(v);
 
-        buttonMenu.show();
+        ListView listview = (ListView) view1.findViewById(R.id.listview);
+        StreetAdapter adapter = new StreetAdapter(context,0);
+        listview.setAdapter(adapter);
+
+        List<BottomMenuBean> list = StreetInfo.getStreet();
+        listview.setOnItemClickListener((parent, view, position, id) -> {
+            tvStreet.setText(list.get(position).content);
+            tvCommunity.setText("");
+            street = Integer.parseInt(list.get(position).id);
+            popupWindow.dismiss();
+        });
     }
 
     /**
@@ -96,19 +111,26 @@ public class ActRegister extends BaseActivity {
      * @param v
      */
     public void chooseCommunity(View v) {
-        if (TextUtils.isEmpty(tvStreet.getText().toString().trim())){
-            ToastUtil.showToast("请先选择街道");
+        if (0 == street){
+            ToastUtil.showToast("请先选择所属街道");
             return;
         }
-        LinkageCommontBottomMenu buttonMenu = new LinkageCommontBottomMenu(this);
-        List<BottomMenuBean> list = StreetInfo.getCommunity(id);
+        PopupWindow popupWindow;
+        final View view1 = LayoutInflater.from(context).inflate(R.layout.pop_list, null);
+        popupWindow = new PopupWindow(view1, v.getWidth(), v.getHeight() * 6, true);
+        popupWindow.setTouchable(true);
+        popupWindow.setBackgroundDrawable(new ColorDrawable());
+        popupWindow.showAsDropDown(v);
 
-        buttonMenu.setData1(list, tvCommunity.getText().toString());
-        buttonMenu.setListener1(bean1 -> {
-            tvCommunity.setText(bean1.content);
+        ListView listview = (ListView) view1.findViewById(R.id.listview);
+        StreetAdapter adapter = new StreetAdapter(context,street);
+        listview.setAdapter(adapter);
+
+        List<BottomMenuBean> list = StreetInfo.getCommunity(street+"");
+        listview.setOnItemClickListener((parent, view, position, id) -> {
+            tvCommunity.setText(list.get(position).content);
+            popupWindow.dismiss();
         });
-
-        buttonMenu.show();
     }
 
     /**
