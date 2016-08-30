@@ -4,20 +4,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none">
 
-        <ListView
-            android:id="@+id/list_view"
+    <!--<HorizontalScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+        <sing.earthquake.common.pullrefresh.PullToRefreshListView
+            android:id="@+id/pullToRefreshListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/white"
             android:cacheColorHint="@android:color/transparent"
             android:divider="@null"
-            android:dividerHeight="0.5dp"
+            android:dividerHeight="0dp"
             android:fadingEdge="none"
             android:listSelector="@android:color/transparent"
             android:scrollbars="none" />
-    </HorizontalScrollView>
+
+    <!--</HorizontalScrollView>-->
 </LinearLayout>

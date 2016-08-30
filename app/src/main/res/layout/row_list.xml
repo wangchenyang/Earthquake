@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-
     <com.zhy.android.percent.support.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -124,7 +123,6 @@
                 android:textSize="14sp"
                 app:layout_widthPercent="300%h" />
         </com.zhy.android.percent.support.PercentLinearLayout>
-
     </com.zhy.android.percent.support.PercentLinearLayout>
 
 </LinearLayout>

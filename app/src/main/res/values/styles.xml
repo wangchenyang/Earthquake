@@ -29,4 +29,12 @@
         <item name="android:windowExitAnimation">@anim/bottom_menu_window_out_anim</item>
     </style>
 
+    <style name="pullToRefreshProgressStyle">
+        <item name="android:indeterminateDrawable">@drawable/pull_to_refresh_loading_rotate</item>
+        <item name="android:minWidth">25dp</item>
+        <item name="android:maxWidth">25dp</item>
+        <item name="android:minHeight">25dp</item>
+        <item name="android:maxHeight">25dp</item>
+    </style>
+
 </resources>
