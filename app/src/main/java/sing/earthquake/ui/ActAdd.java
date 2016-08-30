@@ -76,6 +76,7 @@ public class ActAdd extends BaseActivity {
     private EditText etLivingPeopleNum;
     /** 有无设计图纸，选中为有 */
     private RadioButton rbHaveImage;
+    private RadioButton rbNoHaveImage;
     /** 现在用途或功能 */
     private TextView tvPurpose;
     /** 是否文物保护单位 */
@@ -97,8 +98,16 @@ public class ActAdd extends BaseActivity {
     private TextView tvWallMaterial;
     /** 是否有圈梁 */
     private RadioButton rbHaveRingBeam;
+    private RadioButton rbNoHaveRingBeam;
     /** 是否有构造柱 */
     private RadioButton rbHaveStructuralColumn;
+    private RadioButton rbNoHaveStructuralColumn;
+    /**请选择楼顶类型 */
+    private TextView tvBuildTopType;
+    /**请选场地类别 */
+    private TextView tvFieldType;
+    /** 请选择设施和施工材料 */
+    private TextView tvFacilities;
     /** 有无坠落危险物 */
     private RadioButton rb_have_fall_hazard;
     /** 坠落危险物名 */
@@ -156,6 +165,7 @@ public class ActAdd extends BaseActivity {
         etBuildArea = (EditText) findViewById(R.id.et_build_area);
         etLivingPeopleNum = (EditText) findViewById(R.id.et_living_people_num);
         rbHaveImage = (RadioButton) findViewById(R.id.rb_have_image);
+        rbNoHaveImage = (RadioButton) findViewById(R.id.rb_no_have_image);
         tvPurpose = (TextView) findViewById(R.id.tv_purpose);
         rbIsHistorical = (RadioButton) findViewById(R.id.rb_is_historical);
         rbIsNoHistorical = (RadioButton) findViewById(R.id.rb_is_no_historical);
@@ -169,8 +179,12 @@ public class ActAdd extends BaseActivity {
         tvStructureType = (TextView) findViewById(R.id.tv_structure_type);
         tvWallMaterial = (TextView) findViewById(R.id.tv_wall_material);
         rbHaveRingBeam = (RadioButton) findViewById(R.id.rb_have_ring_beam);
+        rbNoHaveRingBeam = (RadioButton) findViewById(R.id.rb_no_have_ring_beam);
         rbHaveStructuralColumn = (RadioButton) findViewById(R.id.rb_have_structural_column);
-
+        rbNoHaveStructuralColumn = (RadioButton) findViewById(R.id.rb_no_have_structural_column);
+        tvBuildTopType = (TextView) findViewById(R.id.tv_build_top_type);
+        tvFieldType = (TextView) findViewById(R.id.tv_field_type);
+        tvFacilities = (TextView) findViewById(R.id.tv_facilities);
 
     }
 
@@ -218,7 +232,7 @@ public class ActAdd extends BaseActivity {
         bean.setPeopleCount(etLivingPeopleNum.getText().toString().trim());//居住人数或办公人数
         if (rbHaveImage.isChecked()){//有设计图纸
             bean.setTuzhi("有");
-        }else{
+        }else if(rbNoHaveImage.isChecked()){
             bean.setTuzhi("无");
         }
         bean.setYt(tvPurpose.getText().toString().trim());//用途
@@ -235,15 +249,17 @@ public class ActAdd extends BaseActivity {
         bean.setQtcl(tvWallMaterial.getText().toString().trim());//墙体材料
         if (rbHaveRingBeam.isChecked()){//是否有圈梁
             bean.setYwql("有");
-        }else{
+        }else if(rbNoHaveRingBeam.isChecked()){
             bean.setYwql("无");
         }
         if (rbHaveStructuralColumn.isChecked()) {//有无构造柱
             bean.setYwgzz("有");
-        }else{
+        }else if(rbNoHaveStructuralColumn.isChecked()){
             bean.setYwgzz("无");
         }
-
+        bean.setLdlx(tvBuildTopType.getText().toString().trim());//楼顶类型
+        bean.setCdlx(tvFieldType.getText().toString().trim());//场地类别
+        bean.setSgzl(tvFacilities.getText().toString().trim());//设施和施工材料
     }
 
     /**
@@ -569,24 +585,21 @@ public class ActAdd extends BaseActivity {
                 .customView(view, true)
                 .positiveText(android.R.string.ok)
                 .negativeText(android.R.string.cancel)
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        StringBuffer a = new StringBuffer();
-                        for (int i = 0; i < list.size() - 1; i++) {
-                            if (list.get(i).isChecked()) {
-                                a.append(list.get(i).getText().toString() + ",");
-                            }
+                .onPositive((dialog, which1) -> {
+                    StringBuffer a = new StringBuffer();
+                    for (int i = 0; i < list.size() - 1; i++) {
+                        if (list.get(i).isChecked()) {
+                            a.append(list.get(i).getText().toString() + ",");
                         }
-                        if (list.get(list.size() - 1).isChecked()) {
-                            if (TextUtils.isEmpty(etOther.getText().toString())) {
-                                a.append(list.get(list.size() - 1).getText().toString() + ",");
-                            } else {
-                                a.append(etOther.getText().toString() + ",");
-                            }
-                        }
-                        Log.e("111", a.toString());
                     }
+                    if (list.get(list.size() - 1).isChecked()) {
+                        if (TextUtils.isEmpty(etOther.getText().toString())) {
+                            a.append(list.get(list.size() - 1).getText().toString() + ",");
+                        } else {
+                            a.append(etOther.getText().toString() + ",");
+                        }
+                    }
+                    tvBuildTopType.setText(a.toString());
                 }).build()
                 .show();
     }
@@ -597,18 +610,14 @@ public class ActAdd extends BaseActivity {
      * @param v
      */
     int placeType = 0;
-
     public void fieldType(View v) {
         new MaterialDialog.Builder(this)
                 .title("场地类别")
                 .items(R.array.place_type)
-                .itemsCallbackSingleChoice(placeType, new MaterialDialog.ListCallbackSingleChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                        placeType = which;
-                        ((TextView) v).setText(text);
-                        return true;
-                    }
+                .itemsCallbackSingleChoice(placeType, (dialog, view, which1, text) -> {
+                    placeType = which1;
+                    tvFieldType.setText(text);
+                    return true;
                 })
                 .positiveText(android.R.string.ok)
                 .show();
@@ -620,7 +629,6 @@ public class ActAdd extends BaseActivity {
      * @param v
      */
     int constructionMaterial = 0;
-
     public void facilities(View v) {
         new MaterialDialog.Builder(this)
                 .title("设备和施工资料")
@@ -629,7 +637,7 @@ public class ActAdd extends BaseActivity {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
                         constructionMaterial = which;
-                        ((TextView) v).setText(text);
+                        tvFacilities.setText(text);
                         return true;
                     }
                 })

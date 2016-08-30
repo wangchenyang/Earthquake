@@ -25,9 +25,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
-            android:hint="请选择分类等级"
             android:clickable="true"
             android:gravity="center_vertical"
+            android:hint="请选择分类等级"
             android:onClick="strongLevel"
             android:textColor="#313131"
             android:textSize="14sp" />
@@ -52,13 +52,13 @@
         <include layout="@layout/view_line_vertical" />
 
         <TextView
+            android:id="@+id/tv_strong_standard"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
-            android:id="@+id/tv_strong_standard"
             android:clickable="true"
-            android:hint="请选择设计规范"
             android:gravity="center_vertical"
+            android:hint="请选择设计规范"
             android:onClick="strongStandard"
             android:textColor="#313131"
             android:textSize="14sp" />
@@ -83,14 +83,14 @@
         <include layout="@layout/view_line_vertical" />
 
         <TextView
+            android:id="@+id/tv_build_form"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
             android:clickable="true"
             android:gravity="center_vertical"
-            android:onClick="buildForm"
-            android:id="@+id/tv_build_form"
             android:hint="请选择建筑基础形式"
+            android:onClick="buildForm"
             android:textColor="#313131"
             android:textSize="14sp" />
     </LinearLayout>
@@ -114,15 +114,15 @@
         <include layout="@layout/view_line_vertical" />
 
         <TextView
+            android:id="@+id/tv_structure_type"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
             android:clickable="true"
             android:gravity="center_vertical"
+            android:hint="请选择结构类型"
             android:onClick="structureType"
             android:singleLine="true"
-            android:hint="请选择结构类型"
-            android:id="@+id/tv_structure_type"
             android:textColor="#313131"
             android:textSize="14sp" />
     </LinearLayout>
@@ -146,14 +146,14 @@
         <include layout="@layout/view_line_vertical" />
 
         <TextView
+            android:id="@+id/tv_wall_material"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
             android:clickable="true"
             android:gravity="center_vertical"
-            android:onClick="wallMaterial"
             android:hint="请选择墙体材料"
-            android:id="@+id/tv_wall_material"
+            android:onClick="wallMaterial"
             android:textColor="#313131"
             android:textSize="14sp" />
     </LinearLayout>
@@ -191,14 +191,12 @@
                 android:text="有" />
 
             <RadioButton
+                android:id="@+id/rb_no_have_ring_beam"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:text="无" />
         </RadioGroup>
-
-
-
 
     </LinearLayout>
 
@@ -220,7 +218,6 @@
 
         <include layout="@layout/view_line_vertical" />
 
-
         <RadioGroup
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -236,6 +233,7 @@
                 android:text="有" />
 
             <RadioButton
+                android:id="@+id/rb_no_have_structural_column"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
@@ -264,12 +262,13 @@
         <include layout="@layout/view_line_vertical" />
 
         <TextView
+            android:id="@+id/tv_build_top_type"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
-            android:gravity="center_vertical"
-            android:text=""
             android:clickable="true"
+            android:gravity="center_vertical"
+            android:hint="请选择楼顶类型"
             android:onClick="buildTopType"
             android:textColor="#313131"
             android:textSize="14sp" />
@@ -294,11 +293,13 @@
         <include layout="@layout/view_line_vertical" />
 
         <TextView
+            android:id="@+id/tv_field_type"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
-            android:gravity="center_vertical"
             android:clickable="true"
+            android:gravity="center_vertical"
+            android:hint="请选择场地类别"
             android:onClick="fieldType"
             android:textColor="#313131"
             android:textSize="14sp" />
@@ -323,11 +324,13 @@
         <include layout="@layout/view_line_vertical" />
 
         <TextView
+            android:id="@+id/tv_facilities"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
+            android:clickable="true"
             android:gravity="center_vertical"
-           android:clickable="true"
+            android:hint="请选择设施和施工材料"
             android:onClick="facilities"
             android:textColor="#313131"
             android:textSize="14sp" />
