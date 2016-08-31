@@ -8,32 +8,34 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/tv_build_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-         android:layout_centerHorizontal="true"
+            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginBottom="15dp"
             android:singleLine="true"
             android:text="金兴路2号院2号楼"
             android:textColor="#B36835"
-            android:textSize="14sp"  />
+            android:textSize="14sp" />
 
         <ImageView
-            android:paddingBottom="10dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
+            android:id="@+id/iv_hide"
             android:layout_width="50dp"
             android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:paddingBottom="10dp"
             android:src="@drawable/ic_clear_24dp" />
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       android:layout_marginTop="5dp" >
+        android:layout_marginTop="5dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -43,6 +45,7 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/tv_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
@@ -55,7 +58,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp" >
+        android:layout_marginTop="5dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -65,6 +68,7 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/tv_height"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
@@ -87,6 +91,7 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/tv_build_layers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
@@ -100,7 +105,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:gravity="center_vertical" >
+        android:gravity="center_vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -110,6 +115,7 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/tv_end_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
@@ -122,7 +128,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp" >
+        android:layout_marginTop="5dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -132,6 +138,7 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/tv_build_area"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
@@ -144,7 +151,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp" >
+        android:layout_marginTop="5dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -154,6 +161,7 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/tv_build_people_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
@@ -176,6 +184,7 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/tv_used"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
@@ -189,7 +198,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp" >
+        android:layout_marginTop="5dp">
 
         <TextView
             android:layout_width="wrap_content"

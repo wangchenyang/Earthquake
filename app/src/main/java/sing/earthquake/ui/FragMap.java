@@ -5,10 +5,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import sing.earthquake.bean.BuildListBean.DataRowsBean;
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
@@ -25,10 +29,14 @@ import com.baidu.mapapi.model.LatLng;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import okhttp3.Request;
 import okhttp3.Response;
 import sing.earthquake.MyApplication;
 import sing.earthquake.R;
+import sing.earthquake.bean.BuildBean;
 import sing.earthquake.bean.BuildListBean;
 import sing.earthquake.common.Urls;
 import sing.earthquake.common.gson.GsonImpl;
@@ -48,6 +56,7 @@ public class FragMap extends Fragment {
     MapView mMapView = null;
     BaiduMap mBaiduMap;
     private Activity context;
+    private List<DataRowsBean> list;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,6 +73,7 @@ public class FragMap extends Fragment {
     }
     private InfoWindow mInfoWindow;
     private void init() {
+        list = new ArrayList<>();
         mMapView = (MapView) view.findViewById(R.id.bmapView);
         mBaiduMap = mMapView.getMap();
         //mBaiduMap.setMapType(BaiduMap.MAP_TYPE_SATELLITE);
@@ -78,19 +88,53 @@ public class FragMap extends Fragment {
 
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             public boolean onMarkerClick(final Marker marker) {
-                marker.setIcon(bd);
-                View view = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.pop_map, null);
-//                TextView aa = (TextView) view.findViewById(R.id.tv_aaa);
-//                aa.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        mBaiduMap.hideInfoWindow();
-//                    }
-//                });
-                LatLng ll = marker.getPosition();
-                mInfoWindow = new InfoWindow(view, ll, -47);
-                mBaiduMap.showInfoWindow(mInfoWindow);
+                if (list != null && list.size() > 0){
+                    marker.setIcon(bd);
+                    View view = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.pop_map, null);
+                    TextView tvBuildName = (TextView) view.findViewById(R.id.tv_build_name);
+                    TextView tvAddress = (TextView) view.findViewById(R.id.tv_address);
+                    TextView tvHeight = (TextView) view.findViewById(R.id.tv_height);
+                    TextView tvBuildLayers = (TextView) view.findViewById(R.id.tv_build_layers);
+                    TextView tvEndTime = (TextView) view.findViewById(R.id.tv_end_time);
+                    TextView tvBuildArea = (TextView) view.findViewById(R.id.tv_build_area);
+                    TextView tvBuildPeopleNum = (TextView) view.findViewById(R.id.tv_build_people_num);
+                    TextView tvUsed = (TextView) view.findViewById(R.id.tv_used);
 
+                    view.findViewById(R.id.iv_hide).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mBaiduMap.hideInfoWindow();//隐藏弹出物
+                        }
+                    });
+                    LatLng ll = marker.getPosition();
+                    mInfoWindow = new InfoWindow(view, ll, -47);
+                    mBaiduMap.showInfoWindow(mInfoWindow);
+
+                    MapStatus.Builder builder = new MapStatus.Builder();
+                    builder.target(ll).zoom(13.0f);
+                    mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+
+                    for (DataRowsBean bean : list) {
+                        if (ll.latitude == bean.getLat() && ll.longitude == bean.getLon()){
+                            tvBuildName.setText(bean.getJzmc());
+                            tvAddress.setText(bean.getAddress());
+                            tvHeight.setText(bean.getJzwgd());
+                            if (!TextUtils.isEmpty(bean.getDsjzcs()) && !TextUtils.isEmpty(bean.getDxjzcs())){
+                                tvBuildLayers.setText("地上 " + bean.getDsjzcs() + "层，地下" + bean.getDxjzcs() + "层");
+                            }else if (TextUtils.isEmpty(bean.getDsjzcs()) && !TextUtils.isEmpty(bean.getDxjzcs())){
+                                tvBuildLayers.setText("地下" + bean.getDxjzcs() + "层");
+                            }else if (!TextUtils.isEmpty(bean.getDsjzcs()) && TextUtils.isEmpty(bean.getDxjzcs())){
+                                tvBuildLayers.setText("地上" + bean.getDsjzcs() + "层");
+                            }else{
+                                tvBuildLayers.setText("");
+                            }
+                            tvEndTime.setText(bean.getJgsj());
+                            tvBuildArea.setText(bean.getJzmj());
+                            tvBuildPeopleNum.setText(bean.getPeopleCount());
+                            tvUsed.setText(bean.getYt());
+                        }
+                    }
+                }
                 return true;
             }
         });
@@ -119,7 +163,8 @@ public class FragMap extends Fragment {
                 int code = json.optInt("code");//失败才有
                 if ("true".equals(status)){
                     BuildListBean bean = GsonImpl.get().toObject(json.optString("data"), BuildListBean.class);
-                    initOverlay(bean);
+                    list = bean.getDataRows();
+                    initOverlay(list);
                 }else{
                     if (9430 == code){ //请重新登陆
 
@@ -133,11 +178,11 @@ public class FragMap extends Fragment {
 
     BitmapDescriptor bd = BitmapDescriptorFactory.fromResource(R.mipmap.icon_gcoding);
 
-    private void initOverlay(BuildListBean bean) {
-        int a = bean.getDataRows().size();
+    private void initOverlay(List<DataRowsBean> list) {
+        int a =list.size();
         for (int i = 0;i<a;i++){
-            LatLng llA = new LatLng(bean.getDataRows().get(i).getLat(), bean.getDataRows().get(i).getLon());
-            Log.e("111",bean.getDataRows().get(i).getLat()+","+bean.getDataRows().get(i).getLon());
+            LatLng llA = new LatLng(list.get(i).getLat(), list.get(i).getLon());
+            Log.e("111",list.get(i).getLat()+","+list.get(i).getLon());
             MarkerOptions ooA = new MarkerOptions().position(llA).icon(bd).zIndex(9).draggable(true);
             mBaiduMap.addOverlay(ooA);
         }
