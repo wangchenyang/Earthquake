@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import sing.earthquake.common.butommenu.BottomMenuBean;
+import sing.earthquake.bean.BottomMenuBean;
 
 public class StreetInfo {
 
     public static List<BottomMenuBean> getStreet() {
         List<BottomMenuBean> list = new ArrayList<>();
 
+        list.add(new BottomMenuBean("0", "不限"));
         list.add(new BottomMenuBean("1", "建国门外街道"));
         list.add(new BottomMenuBean("2", "朝阳门外街道"));
         list.add(new BottomMenuBean("3", "呼家楼街道"));
@@ -62,6 +63,9 @@ public class StreetInfo {
     public static List<BottomMenuBean> getCommunity(String id) {
         List<BottomMenuBean> list = new ArrayList<>();
         switch (Integer.parseInt(id)) {
+            case 0:
+                list.add(new BottomMenuBean("0", "不限"));
+                break;
             case 1:
                 list.add(new BottomMenuBean("0", "南郎社区"));
                 list.add(new BottomMenuBean("0", "北郎社区"));
@@ -705,6 +709,34 @@ public class StreetInfo {
                 list = Collections.emptyList();
                 break;
         }
+        return list;
+    }
+
+
+    public static List<BottomMenuBean> getUsed() {
+        List<BottomMenuBean> list = new ArrayList<>();
+        list.add(new BottomMenuBean("", "不限"));
+        list.add(new BottomMenuBean("", "住宅"));
+        list.add(new BottomMenuBean("", "办公楼"));
+        list.add(new BottomMenuBean("", "工业厂房"));
+        list.add(new BottomMenuBean("", "仓库"));
+        list.add(new BottomMenuBean("", "政府"));
+        list.add(new BottomMenuBean("", "车库"));
+        list.add(new BottomMenuBean("", "幼儿园"));
+        list.add(new BottomMenuBean("", "小学"));
+        list.add(new BottomMenuBean("", "中学"));
+        list.add(new BottomMenuBean("", "大学"));
+        list.add(new BottomMenuBean("", "商业"));
+        list.add(new BottomMenuBean("", "医院"));
+        list.add(new BottomMenuBean("", "人防"));
+        list.add(new BottomMenuBean("", "大学"));
+        list.add(new BottomMenuBean("", "应急服务"));
+        list.add(new BottomMenuBean("", "图书馆"));
+        list.add(new BottomMenuBean("", "纪念馆"));
+        list.add(new BottomMenuBean("", "博物馆"));
+        list.add(new BottomMenuBean("", "体育馆"));
+        list.add(new BottomMenuBean("", "电影院"));
+
         return list;
     }
 }

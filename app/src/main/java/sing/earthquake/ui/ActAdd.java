@@ -31,9 +31,9 @@ import java.util.List;
 
 import sing.earthquake.R;
 import sing.earthquake.adapter.StreetAdapter;
+import sing.earthquake.bean.BottomMenuBean;
 import sing.earthquake.bean.BuildBean;
 import sing.earthquake.common.BaseActivity;
-import sing.earthquake.common.butommenu.BottomMenuBean;
 import sing.earthquake.common.streetinfo.StreetInfo;
 import sing.earthquake.util.FormUtil;
 import sing.earthquake.util.ToastUtil;

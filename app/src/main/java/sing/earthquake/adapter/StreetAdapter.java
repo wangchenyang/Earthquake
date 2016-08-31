@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import sing.earthquake.R;
-import sing.earthquake.common.butommenu.BottomMenuBean;
+import sing.earthquake.bean.BottomMenuBean;
 import sing.earthquake.common.streetinfo.StreetInfo;
 
 /**
@@ -24,10 +24,13 @@ public class StreetAdapter extends BaseAdapter {
     List<BottomMenuBean> list;
     private Context context;
 
+    // -100为街道 -200为用途 其他为社区
     public StreetAdapter(Context context,int type) {
         this.context = context;
-        if (type == 0){
+        if (type == -100) {
             list = StreetInfo.getStreet();
+        }else if(type == -200){
+            list = StreetInfo.getUsed();
         }else{
             list = StreetInfo.getCommunity(type + "");
         }

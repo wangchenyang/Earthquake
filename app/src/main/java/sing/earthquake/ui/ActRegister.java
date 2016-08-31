@@ -27,16 +27,14 @@ import okhttp3.Request;
 import okhttp3.Response;
 import sing.earthquake.R;
 import sing.earthquake.adapter.StreetAdapter;
+import sing.earthquake.bean.BottomMenuBean;
 import sing.earthquake.common.BaseActivity;
 import sing.earthquake.common.Urls;
-import sing.earthquake.common.butommenu.BottomMenuBean;
-import sing.earthquake.common.butommenu.LinkageCommontBottomMenu;
 import sing.earthquake.common.streetinfo.StreetInfo;
 import sing.earthquake.util.ToastUtil;
 import sing.okhttp.okhttputils.OkHttpUtils;
 import sing.okhttp.okhttputils.cache.CacheMode;
 import sing.okhttp.okhttputils.callback.StringCallback;
-import sing.okhttp.okhttputils.model.HttpParams;
 
 /**
  * @author LiangYx

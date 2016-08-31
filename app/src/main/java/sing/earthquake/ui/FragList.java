@@ -11,8 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cjj.MaterialRefreshLayout;
@@ -31,21 +29,19 @@ import okhttp3.Response;
 import sing.earthquake.MyApplication;
 import sing.earthquake.R;
 import sing.earthquake.bean.BuildListBean;
+import sing.earthquake.bean.BuildListBean.DataRowsBean;
 import sing.earthquake.common.Urls;
 import sing.earthquake.common.gson.GsonImpl;
-import sing.earthquake.common.pullrefresh.PullToRefreshListView;
-import sing.earthquake.util.CommonUtil;
-import sing.earthquake.util.ToastUtil;
 import sing.okhttp.okhttputils.OkHttpUtils;
 import sing.okhttp.okhttputils.cache.CacheMode;
 import sing.okhttp.okhttputils.callback.StringCallback;
-import sing.earthquake.bean.BuildListBean.*;
 
 public class FragList extends Fragment {
 
     private Activity context;
-    private PullToRefreshListView pullToRefreshListView;
     private List<DataRowsBean> list;
+    private RecyclerView recyclerView;
+    private MaterialRefreshLayout materialRefreshLayout;
     private MyAdapter adapter;
     private View view;
 
@@ -62,21 +58,32 @@ public class FragList extends Fragment {
 
         context = getActivity();
 
-        pullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.pullToRefreshListView);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
         list = new ArrayList<>();
         adapter = new MyAdapter();
-        pullToRefreshListView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));//必须有
 
-        pullToRefreshListView.setOnRefreshListener(() -> request(true));
+        materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
 
-        // 上拉加载更多数据
-        pullToRefreshListView.setOnLoadListener(() -> request(false));
+            @Override
+            public void onRefresh(final MaterialRefreshLayout materialRefreshLayout) {
+                request(true);
+            }
+
+            @Override
+            public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
+                request(false);
+            }
+        });
 
         request(true);
     }
 
     private int currentPage;//当前页
     private int totalPage;//总页数
+
     private void request(boolean isReflush) {
         if (isReflush) {
             currentPage = 1;
@@ -85,18 +92,19 @@ public class FragList extends Fragment {
             currentPage++;
         }
         OkHttpUtils.get(Urls.contentList)     // 请求方式和请求url
-                .params("currentPage",currentPage+"")
+                .params("currentPage", currentPage + "")
                 .headers("token", MyApplication.preference().getString("token", ""))
                 .tag(this)                       // 请求的 tag, 主要用于取消对应的请求
                 .cacheKey("contentList")            // 设置当前请求的缓存key,建议每个不同功能的请求设置一个
                 .cacheMode(CacheMode.DEFAULT)    // 缓存模式，详细请看缓存介绍
-                .execute(new MyCallback(context,isReflush));
-        Log.e("currentPage",currentPage+"");
+                .execute(new MyCallback(context, isReflush));
+        Log.e("currentPage", currentPage + "");
     }
 
     private class MyCallback extends StringCallback {
         boolean isReflush;
-        public MyCallback(Context context,boolean isReflush) {
+
+        public MyCallback(Context context, boolean isReflush) {
             super(context, true);
             this.isReflush = isReflush;
         }
@@ -104,9 +112,8 @@ public class FragList extends Fragment {
         @Override
         public void onResponse(boolean isFromCache, String s, Request request, @Nullable Response response) {
             super.onResponse(isFromCache, s, request, response);
-            pullToRefreshListView.onRefreshComplete();
-            pullToRefreshListView.onLoadComplete();
-
+            materialRefreshLayout.finishRefresh();
+            materialRefreshLayout.finishRefreshLoadMore();
             JSONObject json = null;
             try {
                 json = new JSONObject(s);
@@ -117,13 +124,12 @@ public class FragList extends Fragment {
                     BuildListBean bean = GsonImpl.get().toObject(json.optString("data"), BuildListBean.class);
                     currentPage = bean.getCurrentPage();//当前页
                     totalPage = bean.getTotalPage();//总页数
-                    if (currentPage >= totalPage){//到底啦
-                        pullToRefreshListView.setLoadFull(true);
-                    }else{
-                        pullToRefreshListView.setLoadFull(false);
+                    if (currentPage >= totalPage) {//到底啦
+                        materialRefreshLayout.setLoadMore(false);
+                    } else {
+                        materialRefreshLayout.setLoadMore(true);
                     }
-
-                    reflush(bean.getDataRows(),isReflush);
+                    reflush(bean.getDataRows(), isReflush);
                 } else {
                     if (9430 == code) { //请重新登陆
 
@@ -131,8 +137,8 @@ public class FragList extends Fragment {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
-                pullToRefreshListView.onRefreshComplete();
-                pullToRefreshListView.onLoadComplete();
+                materialRefreshLayout.finishRefresh();
+                materialRefreshLayout.finishRefreshLoadMore();
                 currentPage--;
             }
         }
@@ -140,23 +146,24 @@ public class FragList extends Fragment {
         @Override
         public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
             super.onError(isFromCache, call, response, e);
-            pullToRefreshListView.onRefreshComplete();
-            pullToRefreshListView.onLoadComplete();
+            materialRefreshLayout.finishRefresh();
+            materialRefreshLayout.finishRefreshLoadMore();
             currentPage--;
         }
     }
 
     private void reflush(List<DataRowsBean> dataRows, boolean isReflush) {
-        if (isReflush){
+        if (isReflush) {
             list.clear();
         }
         list.addAll(dataRows);
         adapter.setDate(list);
     }
 
-    class MyAdapter extends BaseAdapter {
+    class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         List<DataRowsBean> list;
+        private LayoutInflater inflater;
 
         public void setDate(List<DataRowsBean> list) {
             this.list = list;
@@ -164,43 +171,14 @@ public class FragList extends Fragment {
         }
 
         @Override
-        public int getCount() {
-            return list == null ? 0 : list.size();
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            inflater = LayoutInflater.from(parent.getContext());
+            View view = inflater.inflate(R.layout.row_list, parent, false);
+            return new ViewHolder(view);
         }
 
         @Override
-        public Object getItem(int position) {
-            return list == null ? 0 : list.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder = null;
-            if (convertView == null) {
-
-                holder = new ViewHolder();
-                convertView = LayoutInflater.from(context).inflate(R.layout.row_list, parent, false);
-
-                holder.pllTop = (PercentLinearLayout) convertView.findViewById(R.id.pll_top);
-                holder.pllBottom = (PercentLinearLayout) convertView.findViewById(R.id.pll_bottom);
-
-                holder.tvName = (TextView) convertView.findViewById(R.id.tv_name);
-                holder.tvStreet = (TextView) convertView.findViewById(R.id.tv_street);
-                holder.tvCommunity = (TextView) convertView.findViewById(R.id.tv_community);
-                holder.tvUsed = (TextView) convertView.findViewById(R.id.tv_used);
-                holder.tvEndTime = (TextView) convertView.findViewById(R.id.tv_end_time);
-
-                convertView.setTag(holder);
-
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-
+        public void onBindViewHolder(ViewHolder holder, int position) {
             if (position == 0) {
                 holder.pllTop.setVisibility(View.VISIBLE);
             } else {
@@ -218,11 +196,14 @@ public class FragList extends Fragment {
             holder.tvCommunity.setText(bean.getSsshequ());
             holder.tvUsed.setText(bean.getYt());
             holder.tvEndTime.setText(bean.getJgsj());
-
-            return convertView;
         }
 
-        public class ViewHolder {
+        @Override
+        public int getItemCount() {
+            return list != null ? list.size() : 0;
+        }
+
+        class ViewHolder extends RecyclerView.ViewHolder {
             PercentLinearLayout pllTop;
             PercentLinearLayout pllBottom;
             TextView tvName;
@@ -230,6 +211,17 @@ public class FragList extends Fragment {
             TextView tvCommunity;
             TextView tvUsed;
             TextView tvEndTime;
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+                pllTop = (PercentLinearLayout) itemView.findViewById(R.id.pll_top);
+                pllBottom = (PercentLinearLayout) itemView.findViewById(R.id.pll_bottom);
+                tvName = (TextView) itemView.findViewById(R.id.tv_name);
+                tvStreet = (TextView) itemView.findViewById(R.id.tv_street);
+                tvCommunity = (TextView) itemView.findViewById(R.id.tv_community);
+                tvUsed = (TextView) itemView.findViewById(R.id.tv_used);
+                tvEndTime = (TextView) itemView.findViewById(R.id.tv_end_time);
+            }
         }
     }
 }

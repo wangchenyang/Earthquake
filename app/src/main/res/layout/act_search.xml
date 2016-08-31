@@ -99,24 +99,29 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/bg_edittext_0px_white"
-                    android:layout_height="match_parent">
+                    android:clickable="true"
+                    android:onClick="used">
+
                     <TextView
+                        android:id="@+id/tv_used"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:singleLine="true"
                         android:textColor="#333333"
                         android:textSize="14sp" />
+
                     <ImageView
-                        android:layout_marginRight="5dp"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
-                        android:src="@drawable/ic_arrow_drop_down_24dp"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/ic_arrow_drop_down_24dp" />
                 </LinearLayout>
 
             </com.zhy.android.percent.support.PercentLinearLayout>
@@ -141,24 +146,30 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/bg_edittext_0px_white"
-                    android:layout_height="match_parent">
+                    android:clickable="true"
+                    android:onClick="street">
+
                     <TextView
+                        android:id="@+id/tv_street"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:singleLine="true"
                         android:textColor="#333333"
                         android:textSize="14sp" />
+
                     <ImageView
-                        android:layout_marginRight="5dp"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
-                        android:src="@drawable/ic_arrow_drop_down_24dp"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/ic_arrow_drop_down_24dp" />
                 </LinearLayout>
             </com.zhy.android.percent.support.PercentLinearLayout>
 
@@ -182,24 +193,30 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/bg_edittext_0px_white"
-                    android:layout_height="match_parent">
+                    android:clickable="true"
+                    android:onClick="community">
+
                     <TextView
+                        android:id="@+id/tv_community"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:singleLine="true"
                         android:textColor="#333333"
                         android:textSize="14sp" />
+
                     <ImageView
-                        android:layout_marginRight="5dp"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
-                        android:src="@drawable/ic_arrow_drop_down_24dp"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/ic_arrow_drop_down_24dp" />
                 </LinearLayout>
             </com.zhy.android.percent.support.PercentLinearLayout>
 
@@ -235,7 +252,6 @@
                         android:gravity="center"
                         android:inputType="number"
                         android:singleLine="true"
-                        android:text="21"
                         android:textColor="#333333"
                         android:textSize="14sp" />
 
@@ -256,7 +272,6 @@
                         android:gravity="center"
                         android:inputType="number"
                         android:singleLine="true"
-                        android:text="21"
                         android:textColor="#333333"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -295,7 +310,6 @@
                         android:gravity="center"
                         android:inputType="number"
                         android:singleLine="true"
-                        android:text="21"
                         android:textColor="#333333"
                         android:textSize="14sp" />
 
@@ -316,7 +330,6 @@
                         android:gravity="center"
                         android:inputType="number"
                         android:singleLine="true"
-                        android:text="21"
                         android:textColor="#333333"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -354,7 +367,6 @@
                         android:gravity="center"
                         android:inputType="number"
                         android:singleLine="true"
-                        android:text="21"
                         android:textColor="#333333"
                         android:textSize="14sp" />
 
@@ -375,7 +387,6 @@
                         android:gravity="center"
                         android:inputType="number"
                         android:singleLine="true"
-                        android:text="21"
                         android:textColor="#333333"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -413,7 +424,6 @@
                         android:gravity="center"
                         android:inputType="number"
                         android:singleLine="true"
-                        android:text="21"
                         android:textColor="#333333"
                         android:textSize="14sp" />
 
@@ -434,7 +444,6 @@
                         android:gravity="center"
                         android:inputType="number"
                         android:singleLine="true"
-                        android:text="21"
                         android:textColor="#333333"
                         android:textSize="14sp" />
                 </LinearLayout>
