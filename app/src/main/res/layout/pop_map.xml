@@ -4,7 +4,9 @@
     android:layout_height="wrap_content"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:paddingLeft="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,7 +20,6 @@
             android:layout_centerVertical="true"
             android:layout_marginBottom="15dp"
             android:singleLine="true"
-            android:text="金兴路2号院2号楼"
             android:textColor="#B36835"
             android:textSize="14sp" />
 
@@ -49,7 +50,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:text="金兴路2号院2号楼"
             android:textColor="#313131"
             android:textSize="14sp" />
 
@@ -72,7 +72,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:text="24M"
             android:textColor="#313131"
             android:textSize="14sp" />
 
@@ -95,7 +94,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:text="地上:9层,地下1层"
             android:textColor="#313131"
             android:textSize="14sp" />
 
@@ -119,7 +117,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:text="2016-12-12"
             android:textColor="#313131"
             android:textSize="14sp" />
 
@@ -142,7 +139,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:text="10000M"
             android:textColor="#313131"
             android:textSize="14sp" />
 
@@ -165,7 +161,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:text="400人"
             android:textColor="#313131"
             android:textSize="14sp" />
 
@@ -188,7 +183,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:text="住宅,"
             android:textColor="#313131"
             android:textSize="14sp" />
 

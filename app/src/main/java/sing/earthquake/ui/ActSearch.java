@@ -172,6 +172,9 @@ public class ActSearch extends BaseActivity {
         if ("不限".equals(parms[3])){
             parms[3] = "";
         }
+        if (parms[1].endsWith(",")){
+            parms[1] = parms[1].substring(0,parms[1].length()-1);
+        }
         Intent intent = new Intent(context,ActShowSearch.class);
         intent.putExtra("parms",parms);
         startActivity(intent);
