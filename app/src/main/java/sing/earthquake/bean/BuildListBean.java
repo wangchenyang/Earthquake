@@ -98,7 +98,7 @@ public class BuildListBean implements Serializable {
         this.dataRows = dataRows;
     }
 
-    public static class DataRowsBean {
+    public static class DataRowsBean implements Serializable{
         private int id;
         private String jzmc;
         private String address;
