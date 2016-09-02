@@ -57,6 +57,7 @@ public class FragMap extends Fragment {
     BaiduMap mBaiduMap;
     private Activity context;
     private List<DataRowsBean> list;
+    private Marker marker;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -86,55 +87,30 @@ public class FragMap extends Fragment {
         builder.target(ll).zoom(13.0f);
         mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
 
+        mBaiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
+            @Override
+            public void onMapStatusChangeStart(MapStatus mapStatus) {
+                mBaiduMap.hideInfoWindow();
+            }
+
+            @Override
+            public void onMapStatusChange(MapStatus mapStatus) {
+            }
+
+            @Override
+            public void onMapStatusChangeFinish(MapStatus mapStatus) {
+                if (marker != null && aa == 2){
+                    aa = 3;
+                    setShowMarker(marker,false);
+                }
+            }
+        });
+
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             public boolean onMarkerClick(final Marker marker) {
-                if (list != null && list.size() > 0){
-                    marker.setIcon(bd);
-                    View view = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.pop_map, null);
-                    TextView tvBuildName = (TextView) view.findViewById(R.id.tv_build_name);
-                    TextView tvAddress = (TextView) view.findViewById(R.id.tv_address);
-                    TextView tvHeight = (TextView) view.findViewById(R.id.tv_height);
-                    TextView tvBuildLayers = (TextView) view.findViewById(R.id.tv_build_layers);
-                    TextView tvEndTime = (TextView) view.findViewById(R.id.tv_end_time);
-                    TextView tvBuildArea = (TextView) view.findViewById(R.id.tv_build_area);
-                    TextView tvBuildPeopleNum = (TextView) view.findViewById(R.id.tv_build_people_num);
-                    TextView tvUsed = (TextView) view.findViewById(R.id.tv_used);
-
-                    view.findViewById(R.id.iv_hide).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            mBaiduMap.hideInfoWindow();//隐藏弹出物
-                        }
-                    });
-                    LatLng ll = marker.getPosition();
-                    mInfoWindow = new InfoWindow(view, ll, -47);
-                    mBaiduMap.showInfoWindow(mInfoWindow);
-
-                    MapStatus.Builder builder = new MapStatus.Builder();
-                    builder.target(ll).zoom(13.0f);
-                    mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-
-                    for (DataRowsBean bean : list) {
-                        if (ll.latitude == bean.getLat() && ll.longitude == bean.getLon()){
-                            tvBuildName.setText(bean.getJzmc());
-                            tvAddress.setText(bean.getAddress());
-                            tvHeight.setText(bean.getJzwgd());
-                            if (!TextUtils.isEmpty(bean.getDsjzcs()) && !TextUtils.isEmpty(bean.getDxjzcs())){
-                                tvBuildLayers.setText("地上 " + bean.getDsjzcs() + "层，地下" + bean.getDxjzcs() + "层");
-                            }else if (TextUtils.isEmpty(bean.getDsjzcs()) && !TextUtils.isEmpty(bean.getDxjzcs())){
-                                tvBuildLayers.setText("地下" + bean.getDxjzcs() + "层");
-                            }else if (!TextUtils.isEmpty(bean.getDsjzcs()) && TextUtils.isEmpty(bean.getDxjzcs())){
-                                tvBuildLayers.setText("地上" + bean.getDsjzcs() + "层");
-                            }else{
-                                tvBuildLayers.setText("");
-                            }
-                            tvEndTime.setText(bean.getJgsj());
-                            tvBuildArea.setText(bean.getJzmj());
-                            tvBuildPeopleNum.setText(bean.getPeopleCount());
-                            tvUsed.setText(bean.getYt());
-                        }
-                    }
-                }
+                FragMap.this.marker = marker;
+                aa = 1;
+                setShowMarker(marker,true);
                 return true;
             }
         });
@@ -147,6 +123,56 @@ public class FragMap extends Fragment {
                 .execute(new MyCallback(context));
     }
 
+    int aa = 1;
+    public void setShowMarker(Marker marker,boolean a){
+        aa = aa + 1;
+        if (list != null && list.size() > 0) {
+            marker.setIcon(bd);
+            View view = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.pop_map, null);
+            TextView tvBuildName = (TextView) view.findViewById(R.id.tv_build_name);
+            TextView tvAddress = (TextView) view.findViewById(R.id.tv_address);
+            TextView tvHeight = (TextView) view.findViewById(R.id.tv_height);
+            TextView tvBuildLayers = (TextView) view.findViewById(R.id.tv_build_layers);
+            TextView tvEndTime = (TextView) view.findViewById(R.id.tv_end_time);
+            TextView tvBuildArea = (TextView) view.findViewById(R.id.tv_build_area);
+            TextView tvBuildPeopleNum = (TextView) view.findViewById(R.id.tv_build_people_num);
+            TextView tvUsed = (TextView) view.findViewById(R.id.tv_used);
+
+            view.findViewById(R.id.iv_hide).setOnClickListener(v -> {
+                mBaiduMap.hideInfoWindow();//隐藏弹出物
+            });
+            LatLng ll = marker.getPosition();
+            mInfoWindow = new InfoWindow(view, ll, -47);
+            mBaiduMap.showInfoWindow(mInfoWindow);
+
+            if (a){
+                MapStatus.Builder builder = new MapStatus.Builder();
+                builder.target(ll).zoom(13.0f);
+                mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+            }
+
+            for (DataRowsBean bean : list) {
+                if (ll.latitude == bean.getLat() && ll.longitude == bean.getLon()) {
+                    tvBuildName.setText(bean.getJzmc());
+                    tvAddress.setText(bean.getAddress());
+                    tvHeight.setText(bean.getJzwgd() + "M");
+                    if (!TextUtils.isEmpty(bean.getDsjzcs()) && !TextUtils.isEmpty(bean.getDxjzcs())) {
+                        tvBuildLayers.setText("地上 " + bean.getDsjzcs() + "层，地下" + bean.getDxjzcs() + "层");
+                    } else if (TextUtils.isEmpty(bean.getDsjzcs()) && !TextUtils.isEmpty(bean.getDxjzcs())) {
+                        tvBuildLayers.setText("地下" + bean.getDxjzcs() + "层");
+                    } else if (!TextUtils.isEmpty(bean.getDsjzcs()) && TextUtils.isEmpty(bean.getDxjzcs())) {
+                        tvBuildLayers.setText("地上" + bean.getDsjzcs() + "层");
+                    } else {
+                        tvBuildLayers.setText("");
+                    }
+                    tvEndTime.setText(bean.getJgsj());
+                    tvBuildArea.setText(bean.getJzmj());
+                    tvBuildPeopleNum.setText(bean.getPeopleCount() + "人");
+                    tvUsed.setText(bean.getYt());
+                }
+            }
+        }
+    }
     private class MyCallback extends StringCallback {
         public MyCallback(Context context) {
             super(context,true);
