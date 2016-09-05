@@ -2,6 +2,7 @@ package sing.earthquake.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
 import com.zhy.android.percent.support.PercentLinearLayout;
@@ -28,6 +30,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import sing.earthquake.MyApplication;
 import sing.earthquake.R;
+import sing.earthquake.adapter.BuildAdapter;
 import sing.earthquake.bean.BuildListBean;
 import sing.earthquake.bean.BuildListBean.DataRowsBean;
 import sing.earthquake.common.Urls;
@@ -42,7 +45,7 @@ public class FragList extends Fragment {
     private List<DataRowsBean> list;
     private RecyclerView recyclerView;
     private MaterialRefreshLayout materialRefreshLayout;
-    private MyAdapter adapter;
+    private BuildAdapter adapter;
     private View view;
 
     @Nullable
@@ -61,7 +64,7 @@ public class FragList extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
         list = new ArrayList<>();
-        adapter = new MyAdapter();
+        adapter = new BuildAdapter(context);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));//必须有
 
@@ -79,6 +82,23 @@ public class FragList extends Fragment {
         });
 
         request(true);
+
+        adapter.setOnItemClickListener(bean -> {
+            new MaterialDialog.Builder(context)
+                    .items(R.array.build_option)
+                    .itemsCallback((dialog, view, which, text) -> {
+                        Intent intent = new Intent();
+                        intent.putExtra("build_bean", bean);
+                        if (which == 0) {
+                            intent.putExtra("type", 2);
+                        } else if (which == 1) {
+                            intent.putExtra("type", 1);
+                        }
+                        intent.setClass(context, ActBigForm.class);
+                        startActivity(intent);
+                    })
+                    .show();
+        });
     }
 
     private int currentPage;//当前页
@@ -158,70 +178,5 @@ public class FragList extends Fragment {
         }
         list.addAll(dataRows);
         adapter.setDate(list);
-    }
-
-    class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-
-        List<DataRowsBean> list;
-        private LayoutInflater inflater;
-
-        public void setDate(List<DataRowsBean> list) {
-            this.list = list;
-            notifyDataSetChanged();
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            inflater = LayoutInflater.from(parent.getContext());
-            View view = inflater.inflate(R.layout.row_list, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            if (position == 0) {
-                holder.pllTop.setVisibility(View.VISIBLE);
-            } else {
-                holder.pllTop.setVisibility(View.GONE);
-            }
-
-            if (position % 2 == 0) {
-                holder.pllBottom.setBackgroundColor(getResources().getColor(R.color.color_f7f6f2));
-            } else {
-                holder.pllBottom.setBackgroundColor(getResources().getColor(android.R.color.white));
-            }
-            final DataRowsBean bean = list.get(position);
-            holder.tvName.setText(bean.getJzmc());
-            holder.tvStreet.setText(bean.getSsjd());
-            holder.tvCommunity.setText(bean.getSsshequ());
-            holder.tvUsed.setText(bean.getYt());
-            holder.tvEndTime.setText(bean.getJgsj());
-        }
-
-        @Override
-        public int getItemCount() {
-            return list != null ? list.size() : 0;
-        }
-
-        class ViewHolder extends RecyclerView.ViewHolder {
-            PercentLinearLayout pllTop;
-            PercentLinearLayout pllBottom;
-            TextView tvName;
-            TextView tvStreet;
-            TextView tvCommunity;
-            TextView tvUsed;
-            TextView tvEndTime;
-
-            public ViewHolder(View itemView) {
-                super(itemView);
-                pllTop = (PercentLinearLayout) itemView.findViewById(R.id.pll_top);
-                pllBottom = (PercentLinearLayout) itemView.findViewById(R.id.pll_bottom);
-                tvName = (TextView) itemView.findViewById(R.id.tv_name);
-                tvStreet = (TextView) itemView.findViewById(R.id.tv_street);
-                tvCommunity = (TextView) itemView.findViewById(R.id.tv_community);
-                tvUsed = (TextView) itemView.findViewById(R.id.tv_used);
-                tvEndTime = (TextView) itemView.findViewById(R.id.tv_end_time);
-            }
-        }
     }
 }

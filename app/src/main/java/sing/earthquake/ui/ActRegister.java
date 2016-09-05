@@ -91,7 +91,7 @@ public class ActRegister extends BaseActivity {
         popupWindow.showAsDropDown(v);
 
         ListView listview = (ListView) view1.findViewById(R.id.listview);
-        StreetAdapter adapter = new StreetAdapter(context,0);
+        StreetAdapter adapter = new StreetAdapter(context,-100);
         listview.setAdapter(adapter);
 
         List<BottomMenuBean> list = StreetInfo.getStreet();
@@ -109,7 +109,7 @@ public class ActRegister extends BaseActivity {
      * @param v
      */
     public void chooseCommunity(View v) {
-        if (0 == street){
+        if (TextUtils.isEmpty(tvStreet.getText().toString())){
             ToastUtil.showToast("请先选择所属街道");
             return;
         }

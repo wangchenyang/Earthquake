@@ -202,10 +202,19 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/tv_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:text="点此查看/修改"
+            android:text="  查看  "
+            android:textColor="#FF0000"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/tv_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="  修改  "
             android:textColor="#FF0000"
             android:textSize="14sp" />
 

@@ -116,6 +116,7 @@ public class ActLogin extends BaseActivity {
                     MyApplication.preference().setString("userName", bean.getUserName());
 
                     startActivity(new Intent(context,MainActivity.class));
+                    finish();
                 }else{
                     ToastUtil.showToast(msg);
                 }

@@ -2,6 +2,7 @@ package sing.earthquake.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -53,8 +54,8 @@ import sing.okhttp.okhttputils.callback.StringCallback;
 public class FragMap extends Fragment {
 
     private View view;
-    MapView mMapView = null;
-    BaiduMap mBaiduMap;
+    private MapView mMapView = null;
+    private BaiduMap mBaiduMap;
     private Activity context;
     private List<DataRowsBean> list;
     private Marker marker;
@@ -99,9 +100,9 @@ public class FragMap extends Fragment {
 
             @Override
             public void onMapStatusChangeFinish(MapStatus mapStatus) {
-                if (marker != null && aa == 2){
+                if (marker != null && aa == 2) {
                     aa = 3;
-                    setShowMarker(marker,false);
+                    setShowMarker(marker, false);
                 }
             }
         });
@@ -110,13 +111,14 @@ public class FragMap extends Fragment {
             public boolean onMarkerClick(final Marker marker) {
                 FragMap.this.marker = marker;
                 aa = 1;
-                setShowMarker(marker,true);
+                setShowMarker(marker, true);
                 return true;
             }
         });
 
         OkHttpUtils.get(Urls.contentList)     // 请求方式和请求url
                 .headers("token", MyApplication.preference().getString("token",""))
+                .params("totalRecord", "200")
                 .tag(this)                       // 请求的 tag, 主要用于取消对应的请求
                 .cacheKey("contentList")            // 设置当前请求的缓存key,建议每个不同功能的请求设置一个
                 .cacheMode(CacheMode.DEFAULT)    // 缓存模式，详细请看缓存介绍
@@ -152,7 +154,7 @@ public class FragMap extends Fragment {
             }
 
             for (DataRowsBean bean : list) {
-                if (ll.latitude == bean.getLat() && ll.longitude == bean.getLon()) {
+                if (ll.latitude == Double.parseDouble(bean.getLat()) && ll.longitude == Double.parseDouble(bean.getLon())) {
                     tvBuildName.setText(bean.getJzmc());
                     tvAddress.setText(bean.getAddress());
                     tvHeight.setText(bean.getJzwgd() + "M");
@@ -169,6 +171,21 @@ public class FragMap extends Fragment {
                     tvBuildArea.setText(bean.getJzmj());
                     tvBuildPeopleNum.setText(bean.getPeopleCount() + "人");
                     tvUsed.setText(bean.getYt());
+
+                    view.findViewById(R.id.tv_detail).setOnClickListener(v -> {//查看
+                        Intent intent = new Intent();
+                        intent.putExtra("build_bean", bean);
+                        intent.putExtra("type", 2);
+                        intent.setClass(context, ActBigForm.class);
+                        startActivity(intent);
+                    });
+                    view.findViewById(R.id.tv_change).setOnClickListener(v -> {//修改
+                        Intent intent = new Intent();
+                        intent.putExtra("build_bean", bean);
+                        intent.putExtra("type", 1);
+                        intent.setClass(context, ActBigForm.class);
+                        startActivity(intent);
+                    });
                 }
             }
         }
@@ -207,7 +224,7 @@ public class FragMap extends Fragment {
     private void initOverlay(List<DataRowsBean> list) {
         int a =list.size();
         for (int i = 0;i<a;i++){
-            LatLng llA = new LatLng(list.get(i).getLat(), list.get(i).getLon());
+            LatLng llA = new LatLng((Double.parseDouble(list.get(i).getLat())), (Double.parseDouble(list.get(i).getLon())));
             Log.e("111",list.get(i).getLat()+","+list.get(i).getLon());
             MarkerOptions ooA = new MarkerOptions().position(llA).icon(bd).zIndex(9).draggable(true);
             mBaiduMap.addOverlay(ooA);

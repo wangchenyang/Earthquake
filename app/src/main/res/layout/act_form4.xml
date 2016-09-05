@@ -48,7 +48,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="无钢筋烟筒"
                 android:textColor="#313131"
                 android:textSize="14sp" />
         </RadioGroup>
@@ -198,7 +197,6 @@
             android:background="@null"
             android:ellipsize="end"
             android:gravity="center_vertical"
-            android:hint="请输入鉴定单位"
             android:paddingRight="10dp"
             android:singleLine="true"
             android:textColor="#313131"
@@ -249,7 +247,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="墙"
                 android:textColor="#313131"
                 android:textSize="14sp" />
         </RadioGroup>
@@ -483,6 +480,7 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/bt_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_press_blue_6px"

@@ -34,14 +34,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.ActBigForm"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.ActRegister"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.MainActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.ActAdd"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.ActSearch"
@@ -54,6 +54,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.ActUpdateBuild"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ActLocation"
             android:screenOrientation="portrait" />
     </application>
 

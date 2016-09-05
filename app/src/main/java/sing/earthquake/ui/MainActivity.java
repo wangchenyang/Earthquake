@@ -8,9 +8,12 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import sing.earthquake.R;
+import sing.earthquake.util.ToastUtil;
 
 /**
  * @author: LiangYX
@@ -103,7 +106,27 @@ public class MainActivity extends FragmentActivity {
      * 添加
      * @param v
      */
-    public void add(View v){
-        startActivity(new Intent(context,ActAdd.class));
+    public void add(View v) {
+        Intent intent = new Intent();
+        intent.setClass(context, ActBigForm.class);
+        intent.putExtra("type", 0);
+        startActivity(intent);
     }
+
+    private long exitTime = 0;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                ToastUtil.showToast("再按一次退出程序");
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }

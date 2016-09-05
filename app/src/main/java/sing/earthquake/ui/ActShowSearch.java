@@ -86,14 +86,14 @@ public class ActShowSearch extends BaseActivity {
                     .items(R.array.build_option)
                     .itemsCallback((dialog, view, which, text) -> {
                         Intent intent = new Intent();
-                        intent.putExtra("build_bean",bean);
+                        intent.putExtra("build_bean", bean);
                         if (which == 0) {
-                            intent.setClass(context,ActBuildDetail.class);
-                            startActivity(intent);
+                            intent.putExtra("type", 2);
                         } else if (which == 1) {
-                            intent.setClass(context,ActUpdateBuild.class);
-                            startActivity(intent);
+                            intent.putExtra("type", 1);
                         }
+                        intent.setClass(context, ActBigForm.class);
+                        startActivity(intent);
                     })
                     .show();
         });

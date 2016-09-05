@@ -136,8 +136,8 @@ public class BuildListBean implements Serializable {
         private String pmgz;
         private String lmgz;
         private String uname;
-        private double lon;
-        private double lat;
+        private String lon;
+        private String lat;
         private String shuoming;
         private String qtcl;
         private String ywql;
@@ -442,19 +442,19 @@ public class BuildListBean implements Serializable {
             this.uname = uname;
         }
 
-        public double getLon() {
+        public String getLon() {
             return lon;
         }
 
-        public void setLon(double lon) {
+        public void setLon(String lon) {
             this.lon = lon;
         }
 
-        public double getLat() {
+        public String getLat() {
             return lat;
         }
 
-        public void setLat(double lat) {
+        public void setLat(String lat) {
             this.lat = lat;
         }
 
