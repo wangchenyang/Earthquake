@@ -934,6 +934,7 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
 
     int a = R.array.image1;
     int b = R.array.image2;
+    private String positive,side,back;//三种图片的a
     @Override
     public void onClick(View v) {
         switch (v.getId()){
