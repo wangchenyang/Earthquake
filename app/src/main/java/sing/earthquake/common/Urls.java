@@ -13,4 +13,9 @@ public class Urls {
     public static final String login = common + "/login";
     /** 获取建筑列表、搜索 */
     public static final String contentList = common + "content/list";
+    /** 修改建筑物详情 */
+    public static final String modify = common + "content/modify";
+    /** 添加建筑物详情 */
+    public static final String add = common + "content/add";
+
 }

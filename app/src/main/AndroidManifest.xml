@@ -52,9 +52,6 @@
             android:name=".ui.ActShowSearch"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.ActBuildDetail"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.ActUpdateBuild"
             android:screenOrientation="portrait" />
         <activity

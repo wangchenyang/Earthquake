@@ -2,9 +2,7 @@ package sing.earthquake.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.media.Image;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 

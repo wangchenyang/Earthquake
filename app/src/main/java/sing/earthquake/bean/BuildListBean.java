@@ -99,7 +99,7 @@ public class BuildListBean implements Serializable {
     }
 
     public static class DataRowsBean implements Serializable{
-        private int id;
+        private String id;
         private String jzmc;
         private String address;
         private String postcode;
@@ -173,11 +173,11 @@ public class BuildListBean implements Serializable {
             this.beimian = beimian;
         }
 
-        public int getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(String id) {
             this.id = id;
         }
 

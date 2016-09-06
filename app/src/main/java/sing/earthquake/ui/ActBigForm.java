@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.text.TextUtils;
@@ -22,14 +23,24 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
+import sing.earthquake.MyApplication;
 import sing.earthquake.R;
 import sing.earthquake.adapter.StreetAdapter;
 import sing.earthquake.bean.BottomMenuBean;
+import sing.earthquake.bean.BuildListBean;
 import sing.earthquake.bean.BuildListBean.DataRowsBean;
 import sing.earthquake.common.BaseActivity;
+import sing.earthquake.common.Urls;
+import sing.earthquake.common.gson.GsonImpl;
 import sing.earthquake.common.photo.ActPreViewIcon;
 import sing.earthquake.common.photo.SelectPictureActivity;
 import sing.earthquake.common.streetinfo.StreetInfo;
@@ -37,6 +48,9 @@ import sing.earthquake.util.CommonUtil;
 import sing.earthquake.util.FormUtil;
 import sing.earthquake.util.LoaderImage;
 import sing.earthquake.util.ToastUtil;
+import sing.okhttp.okhttputils.OkHttpUtils;
+import sing.okhttp.okhttputils.cache.CacheMode;
+import sing.okhttp.okhttputils.callback.StringCallback;
 
 /**
  * @className   ActBigForm
@@ -116,7 +130,7 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
         }
         intent.putExtra("lon",bean.getLon());
         intent.putExtra("lat",bean.getLat());
-        startActivityForResult(intent,100);
+        startActivityForResult(intent, 100);
     }
 
     /**
@@ -432,6 +446,8 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
         bean.setZhengmian(positive);
         bean.setCemian(side);
         bean.setBeimian(back);
+
+        request();
     }
 
     /**
@@ -1064,6 +1080,144 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
                     }
                     LoaderImage.getInstance(0).ImageLoaders(back,ivBack);
                     break;
+            }
+        }
+    }
+
+    /**
+     * 提交数据到服务器
+     */
+    private void request() {
+        String url = "";
+        if (type == 0){//添加
+            url = Urls.add;
+        }else if (type == 1){//修改
+            url = Urls.modify;
+        }
+        OkHttpUtils.post(url)
+                .params("id", bean.getId())
+                .params("lon",bean.getLon())
+                .params("lat",bean.getLat())
+                .params("jzmc",bean.getJzmc())
+//        bean.setJzmc(getValus(editList.get(0)));//建筑物名称
+//        bean.setAddress(getValus(editList.get(1)));//详细地址
+//        bean.setPostcode(getValus(editList.get(2)));//邮政编码
+//        bean.setSsjd(getValus(textList.get(0)));//所属街道
+//        bean.setSsshequ(getValus(textList.get(1)));//所属社区
+//        bean.setSsxiaoqu(getValus(editList.get(3)));//所属小区
+//        bean.setLouzuobianhao(getValus(editList.get(4)));//楼座编号
+//        bean.setJzwgd(getValus(editList.get(5)));//建筑物高度
+//        bean.setDsjzcs(buildLayersUp);//地上楼层数
+//        bean.setDxjzcs(buildLayersDown);//地下楼层数
+//        bean.setSjdw(getValus(editList.get(6)));//设计单位
+//        bean.setJsdw(getValus(editList.get(7)));//建设单位
+//        bean.setSgdw(getValus(editList.get(8)));// 施工单位
+//        bean.setJldw(getValus(editList.get(9)));// 监理单位
+//        bean.setJgsj(getValus(editList.get(10)));// 竣工时间
+//        bean.setJzmj(getValus(editList.get(11)));// 建筑面积
+//        bean.setPeopleCount(getValus(editList.get(12)));// 办公人数
+//        if (radioList.get(0).isChecked()){
+//            bean.setTuzhi("有");
+//        }else if (radioList.get(1).isChecked()){
+//            bean.setTuzhi("无");
+//        }else{
+//            bean.setTuzhi("");
+//        }
+//        bean.setYt(getValus(textList.get(3)));//用途
+//
+//        if (radioList.get(2).isChecked()){//文物单位
+//            bean.setWenwudanwei("否");
+//        }else if (radioList.get(3).isChecked()){
+//            bean.setWenwudanwei(getValus(textList.get(4)));
+//        }
+//        bean.setKz(getValus(textList.get(5)));//抗震防裂度
+//        bean.setFldj(getValus(textList.get(6)));//抗震设防分类等级
+//        bean.setGuifan(getValus(textList.get(7)));//设计规范
+//        bean.setJzjcxs(getValus(textList.get(8)));//建筑基础形式
+//        bean.setJglx(getValus(textList.get(9)));//结构类型
+//        bean.setQtcl(getValus(textList.get(10)));//墙体材料
+//        if (radioList.get(4).isChecked()){
+//            bean.setYwql("有圈梁");
+//        }else if (radioList.get(5).isChecked()){
+//            bean.setYwql("无圈梁");
+//        }
+//        if (radioList.get(6).isChecked()){
+//            bean.setYwgzz("有构造柱");
+//        }else if (radioList.get(7).isChecked()){
+//            bean.setYwgzz("无构造柱");
+//        }
+//        bean.setLdlx(getValus(textList.get(11)));//楼顶类型
+//        bean.setCdlx(getValus(textList.get(12)));//场地类别
+//        bean.setSgzl(getValus(textList.get(13)));//设施和施工材料
+//        if (radioList.get(8).isChecked()){
+//            bean.setZzwxw("无");
+//        }else if (radioList.get(9).isChecked()){
+//            bean.setZzwxw(getValus(textList.get(14)));
+//        }
+//        if (radioList.get(10).isChecked()){
+//            bean.setSfjgkzjg("否");
+//        }else if (radioList.get(11).isChecked()){
+//            bean.setSfjgkzjg("是");
+//        }
+//        bean.setKzjgsj(getValus(editList.get(13)));//抗震加固时间
+//        if (radioList.get(12).isChecked()){//是否危房
+//            bean.setShifouweifang("否");
+//        }else if (radioList.get(13).isChecked()){
+//            bean.setShifouweifang("是");
+//        }
+//        bean.setKzjgsj(getValus(editList.get(14)));//危房鉴定单位
+//        if (radioList.get(14).isChecked()){//主体结构是否有裂缝
+//            bean.setZtjglf("无");
+//        }else if (radioList.get(15).isChecked()){
+//            bean.setZtjglf(getValus(textList.get(15)));
+//        }
+//        bean.setZtjglfqk(getValus(editList.get(15)));//主体结构裂缝情况
+//        if (radioList.get(16).isChecked()){
+//            bean.setPmgz("是");
+//        }else if (radioList.get(17).isChecked()){
+//            bean.setPmgz("否");
+//        }
+//        if (radioList.get(18).isChecked()){
+//            bean.setLmgz("是");
+//        }else if (radioList.get(19).isChecked()){
+//            bean.setLmgz("否");
+//        }
+//        bean.setZhengmian(positive);
+//        bean.setCemian(side);
+//        bean.setBeimian(back);
+                .headers("token", MyApplication.preference().getString("token", ""))
+                .tag(this)                       // 请求的 tag, 主要用于取消对应的请求
+                .cacheKey("contentList")            // 设置当前请求的缓存key,建议每个不同功能的请求设置一个
+                .cacheMode(CacheMode.DEFAULT)    // 缓存模式，详细请看缓存介绍
+                .execute(new MyCallback(context));
+    }
+
+    private class MyCallback extends StringCallback {
+
+        public MyCallback(Context context) {
+            super(context, true);
+        }
+
+        @Override
+        public void onResponse(boolean isFromCache, String s, Request request, @Nullable Response response) {
+            super.onResponse(isFromCache, s, request, response);
+            JSONObject json = null;
+            try {
+                json = new JSONObject(s);
+                String status = json.optString("success");
+                String msg = json.optString("msg");
+                int code = json.optInt("code");//失败才有
+                if ("true".equals(status)) {
+
+                } else {
+                    if (9430 == code) { //请重新登陆
+
+                    }else{
+                        ToastUtil.showToast(msg);
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
     }
