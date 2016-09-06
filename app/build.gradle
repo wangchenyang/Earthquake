@@ -21,7 +21,7 @@ android {
         keystore {
             keyAlias '100'
             keyPassword '52259001'
-            storeFile file('D:/workspace/Earthquake/keystore.jks')
+            storeFile file('/Users/Sing/Desktop/Earthquake/keystore.jks')
             storePassword '52259001'
         }
     }

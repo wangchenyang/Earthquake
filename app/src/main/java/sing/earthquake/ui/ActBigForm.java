@@ -1,6 +1,9 @@
 package sing.earthquake.ui;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
@@ -72,6 +75,7 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void init() {
+        context.startService(new Intent(context,MyService.class));
         isFirst = true;
         TextView tvTitle = (TextView) findViewById(R.id.tv_title);
         type = getIntent().getExtras().getInt("type",0);
@@ -330,9 +334,12 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
             }
         }
 
-        LoaderImage.getInstance(0).ImageLoaders(bean.getZhengmian(),ivPositive);
-        LoaderImage.getInstance(0).ImageLoaders(bean.getCemian(),ivSide);
-        LoaderImage.getInstance(0).ImageLoaders(bean.getBeimian(),ivBack);
+        positive = bean.getZhengmian();
+        side = bean.getCemian();
+        back = bean.getBeimian();
+        LoaderImage.getInstance(0).ImageLoaders(positive,ivPositive);
+        LoaderImage.getInstance(0).ImageLoaders(side,ivSide);
+        LoaderImage.getInstance(0).ImageLoaders(back,ivBack);
         isFirst = false;
     }
 
@@ -1006,11 +1013,11 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
     // 预览
     public void preview(int types,View v) {
         ArrayList<String> selectedPicture = new ArrayList<>();
-        if (types == 0){
+        if (types == 0 && !CommonUtil.isEmpty(positive)){
             selectedPicture.add(positive);
-        }else if(types == 1){
+        }else if(types == 1 && !CommonUtil.isEmpty(positive)){
             selectedPicture.add(side);
-        }else if (types == 2){
+        }else if (types == 2 && !CommonUtil.isEmpty(positive)){
             selectedPicture.add(back);
         }
         if (selectedPicture != null && selectedPicture.size() > 0){
