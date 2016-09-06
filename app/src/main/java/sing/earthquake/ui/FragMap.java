@@ -96,6 +96,7 @@ public class FragMap extends Fragment {
 
             @Override
             public void onMapStatusChange(MapStatus mapStatus) {
+                zoom = mapStatus.zoom;
             }
 
             @Override
@@ -125,6 +126,7 @@ public class FragMap extends Fragment {
                 .execute(new MyCallback(context));
     }
 
+    float zoom = 13.0f;
     int aa = 1;
     public void setShowMarker(Marker marker,boolean a){
         aa = aa + 1;
@@ -149,7 +151,11 @@ public class FragMap extends Fragment {
 
             if (a){
                 MapStatus.Builder builder = new MapStatus.Builder();
-                builder.target(ll).zoom(13.0f);
+                if (zoom > 13.0f){
+                    builder.target(ll).zoom(zoom);
+                }else{
+                    builder.target(ll).zoom(13.0f);
+                }
                 mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
             }
 

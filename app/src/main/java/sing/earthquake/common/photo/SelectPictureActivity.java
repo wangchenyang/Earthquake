@@ -38,6 +38,7 @@ import sing.earthquake.R;
 import sing.earthquake.common.BaseActivity;
 import sing.earthquake.common.CommonConstant;
 import sing.earthquake.util.CommonUtil;
+import sing.earthquake.util.LoaderImage;
 
 /**
  * @author: LiangYX
@@ -91,9 +92,8 @@ public class SelectPictureActivity extends BaseActivity {
     private FolderAdapter folderAdapter;
     private ImageFloder imageAll, currentImageFolder;
 
-    TitleBar bar;
     /** 已选择的图片 */
-    private ArrayList<String> selectedPicture = new ArrayList<String>();
+    private ArrayList<String> selectedPicture = new ArrayList<>();
     private String cameraPath = null;
 
     private String type = "";//类型，拍照、选图、全部
@@ -175,7 +175,7 @@ public class SelectPictureActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                listview.setVisibility(8);
+                listview.setVisibility(View.GONE);
             }
         });
     }
@@ -314,7 +314,7 @@ public class SelectPictureActivity extends BaseActivity {
             if (type.equals(PHOTOALBUM)) {// 只有图库
                 holder.check.setVisibility(View.VISIBLE);
                 final ImageItem item = currentImageFolder.images.get(position);
-                LoaderImage.getInstance(R.drawable.empty_photo).ImageLoaders("file://" + item.path, holder.iv);
+                LoaderImage.getInstance(R.mipmap.empty_photo).ImageLoaders("file://" + item.path, holder.iv);
                 boolean isSelected = selectedPicture.contains(item.path);
                 final Button box = holder.check;
                 convertView.setOnClickListener(new OnClickListener() {
@@ -350,7 +350,7 @@ public class SelectPictureActivity extends BaseActivity {
                 holder.check.setSelected(isSelected);
             } else if (type.equals(ALL)) {//全部
                 if (position == 0) {
-                	LoaderImage.getInstance(R.drawable.pickphotos_to_camera_normal).ImageLoaders("", holder.iv);
+                	LoaderImage.getInstance(R.mipmap.pickphotos_to_camera_normal).ImageLoaders("", holder.iv);
                     holder.check.setVisibility(View.INVISIBLE);
                     convertView.setOnClickListener(new OnClickListener() {
 						
@@ -363,7 +363,7 @@ public class SelectPictureActivity extends BaseActivity {
                     position = position - 1;
                     holder.check.setVisibility(View.VISIBLE);
                     final ImageItem item = currentImageFolder.images.get(position);
-                    LoaderImage.getInstance(R.drawable.empty_photo).ImageLoaders("file://" + item.path, holder.iv);
+                    LoaderImage.getInstance(R.mipmap.empty_photo).ImageLoaders("file://" + item.path, holder.iv);
                     boolean isSelected = selectedPicture.contains(item.path);
                     final Button box = holder.check;
                     
@@ -404,7 +404,6 @@ public class SelectPictureActivity extends BaseActivity {
                     holder.check.setSelected(isSelected);
                 }
             }
-
             return convertView;
         }
     }
@@ -446,10 +445,10 @@ public class SelectPictureActivity extends BaseActivity {
                 holder = (FolderViewHolder) convertView.getTag();
             }
             ImageFloder item = mDirPaths.get(position);
-            LoaderImage.getInstance(R.drawable.empty_photo).ImageLoaders("file://" + item.getFirstImagePath(), holder.id_dir_item_image);
+            LoaderImage.getInstance(R.mipmap.empty_photo).ImageLoaders("file://" + item.getFirstImagePath(), holder.id_dir_item_image);
             holder.id_dir_item_count.setText(item.images.size() + "张");
             holder.id_dir_item_name.setText(item.getName());
-            holder.choose.setVisibility(currentImageFolder == item ? 0 : 8);
+            holder.choose.setVisibility(currentImageFolder == item ? View.VISIBLE : View.GONE);
             return convertView;
         }
     }

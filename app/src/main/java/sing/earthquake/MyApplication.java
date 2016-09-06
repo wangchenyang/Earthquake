@@ -4,6 +4,11 @@ import android.app.Application;
 import android.content.Context;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 import sing.earthquake.common.MyPreference;
 import sing.okhttp.okhttputils.OkHttpUtils;
@@ -35,10 +40,14 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         context = getApplicationContext();
-        SDKInitializer.initialize(context);
 
+        SDKInitializer.initialize(context);
+        initOkHttp();
+        initImageLoader(context);
+    }
+
+    private void initOkHttp() {
         HttpHeaders headers = new HttpHeaders();
 //        headers.put("commonHeaderKey1", "commonHeaderValue1");    //所有的 header 都 不支持 中文
 //        headers.put("commonHeaderKey2", "commonHeaderValue2");
@@ -58,5 +67,24 @@ public class MyApplication extends Application {
                 .setCookieStore(new PersistentCookieStore())                       //cookie持久化存储，如果cookie不过期，则一直有效
                 .addCommonHeaders(headers)                                         //设置全局公共头
                 .addCommonParams(params);                                          //设置全局公共参数
+    }
+
+    /**
+     * @Description: 初始化图标加载器
+     * @param context
+     * @return: void
+     */
+    public static void initImageLoader(Context context) {
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+                context).threadPriority(Thread.NORM_PRIORITY - 2)
+                .denyCacheImageMultipleSizesInMemory()
+                .diskCacheFileNameGenerator(new Md5FileNameGenerator())
+                .diskCacheSize(50 * 1024 * 1024)
+                // 50 Mb
+                .tasksProcessingOrder(QueueProcessingType.LIFO)
+                .memoryCache(new WeakMemoryCache())// 采用软引用
+                .writeDebugLogs() // Remove for release app
+                .build();
+        ImageLoader.getInstance().init(config);
     }
 }

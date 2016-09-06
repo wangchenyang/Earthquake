@@ -70,11 +70,7 @@
         <item>修改</item>
     </string-array>
 
-    <string-array name="image1">
-        <item>上传</item>
-    </string-array>
-
-    <string-array name="image2">
+    <string-array name="image">
         <item>预览</item>
         <item>删除</item>
         <item>重新上传</item>

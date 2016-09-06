@@ -27,8 +27,12 @@ import sing.earthquake.adapter.StreetAdapter;
 import sing.earthquake.bean.BottomMenuBean;
 import sing.earthquake.bean.BuildListBean.DataRowsBean;
 import sing.earthquake.common.BaseActivity;
+import sing.earthquake.common.photo.ActPreViewIcon;
+import sing.earthquake.common.photo.SelectPictureActivity;
 import sing.earthquake.common.streetinfo.StreetInfo;
+import sing.earthquake.util.CommonUtil;
 import sing.earthquake.util.FormUtil;
+import sing.earthquake.util.LoaderImage;
 import sing.earthquake.util.ToastUtil;
 
 /**
@@ -325,6 +329,10 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
                 radioList.get(19).setChecked(true);
             }
         }
+
+        LoaderImage.getInstance(0).ImageLoaders(bean.getZhengmian(),ivPositive);
+        LoaderImage.getInstance(0).ImageLoaders(bean.getCemian(),ivSide);
+        LoaderImage.getInstance(0).ImageLoaders(bean.getBeimian(),ivBack);
         isFirst = false;
     }
 
@@ -415,6 +423,9 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
         }else if (radioList.get(19).isChecked()){
             bean.setLmgz("否");
         }
+        bean.setZhengmian(positive);
+        bean.setCemian(side);
+        bean.setBeimian(back);
     }
 
     /**
@@ -919,58 +930,135 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
                 .show();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100 &&  resultCode == Activity.RESULT_OK && data != null){
-            String lon = data.getExtras().getString("lon","");
-            String lat = data.getExtras().getString("lat","");
-            if (!TextUtils.isEmpty(lon) && !TextUtils.isEmpty(lat)){
-                bean.setLon(lon);
-                bean.setLat(lat);
-            }
-        }
-    }
-
-    int a = R.array.image1;
-    int b = R.array.image2;
     private String positive,side,back;//三种图片的a
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.iv_positive:
-                new MaterialDialog.Builder(this)
-                        .items(a)
-                        .itemsCallback(new MaterialDialog.ListCallback() {
-                            @Override
-                            public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                                ToastUtil.showToast("暂未实现");
-                            }
-                        })
-                        .show();
+                type(0,v);
                 break;
             case R.id.iv_side:
-                new MaterialDialog.Builder(this)
-                        .items(b)
-                        .itemsCallback(new MaterialDialog.ListCallback() {
-                            @Override
-                            public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                                ToastUtil.showToast("暂未实现");
-                            }
-                        })
-                        .show();
+                type(1,v);
                 break;
             case R.id.iv_back:
+                type(2,v);
+                break;
+        }
+    }
+
+    /**
+     * 点击图片的操作
+     * @param types 0为正面，1为侧面，2为背面
+     */
+    public void type(int types,View v){
+        if (type == 2){//预览
+            preview(types,v);
+        }else{
+            String str = "";
+            if (types == 0){
+                str = positive;
+            }else if (types == 1){
+                str = side;
+            }else if (types == 2){
+                str = back;
+            }
+            if (CommonUtil.isEmpty(str)){
+                chooseImage(types);//无照片进行添加照片
+            }else{
                 new MaterialDialog.Builder(this)
-                        .items(b)
+                        .items(R.array.image)
                         .itemsCallback(new MaterialDialog.ListCallback() {
                             @Override
                             public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                                ToastUtil.showToast("暂未实现");
+                                if (which == 0){//预览
+                                    preview(types,v);
+                                }else if (which == 1){//删除
+                                    if (types == 0){
+                                        positive = "";
+                                        LoaderImage.getInstance(0).ImageLoaders("",ivPositive);
+                                    }else if (types == 1){
+                                        side = "";
+                                        LoaderImage.getInstance(0).ImageLoaders("",ivSide);
+                                    }else if (types == 2){
+                                        back = "";
+                                        LoaderImage.getInstance(0).ImageLoaders("",ivBack);
+                                    }
+                                }else if (which == 2) {//重新上传
+                                    chooseImage(types);
+                                }
                             }
                         })
                         .show();
-                break;
+            }
+        }
+    }
+    /**
+     * 选择图片
+     * @param type 0为正面，1为侧面，2为背面
+     */
+    public void chooseImage(int type){
+        Intent intent = new Intent(context, SelectPictureActivity.class);
+        intent.putExtra(SelectPictureActivity.KEY_RESLUT, SelectPictureActivity.ALL);
+        intent.putExtra(SelectPictureActivity.INTENT_MAX_NUM, 1);
+        startActivityForResult(intent, type);
+    }
+
+    // 预览
+    public void preview(int types,View v) {
+        ArrayList<String> selectedPicture = new ArrayList<>();
+        if (types == 0){
+            selectedPicture.add(positive);
+        }else if(types == 1){
+            selectedPicture.add(side);
+        }else if (types == 2){
+            selectedPicture.add(back);
+        }
+        if (selectedPicture != null && selectedPicture.size() > 0){
+            Intent intent = new Intent(context, ActPreViewIcon.class);
+            intent.putExtra(ActPreViewIcon.KEY_ALL_ICON, selectedPicture);
+            intent.putExtra(ActPreViewIcon.KEY_CURRENT_ICON, 0);
+            int[] location = new int[2];
+            v.getLocationOnScreen(location);
+            intent.putExtra("locationX", location[0]);
+            intent.putExtra("locationY", location[1]);
+            context.startActivity(intent);
+            overridePendingTransition(0, 0);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && data != null){
+            List<String> selectedPicture = (List<String>) data.getSerializableExtra(SelectPictureActivity.INTENT_SELECTED_PICTURE);
+            switch (requestCode){
+                case 100://选择位置
+                    String lon = data.getExtras().getString("lon","");
+                    String lat = data.getExtras().getString("lat","");
+                    if (!TextUtils.isEmpty(lon) && !TextUtils.isEmpty(lat)){
+                        bean.setLon(lon);
+                        bean.setLat(lat);
+                    }
+                    break;
+                case 0://正面照片
+                    if (selectedPicture != null && selectedPicture.size() > 0){
+                        positive = selectedPicture.get(0);
+                    }
+                    LoaderImage.getInstance(0).ImageLoaders(positive,ivPositive);
+                    break;
+                case 1://侧面
+                    if (selectedPicture != null && selectedPicture.size() > 0){
+                        side = selectedPicture.get(0);
+                    }
+                    LoaderImage.getInstance(0).ImageLoaders(side,ivSide);
+                    break;
+                case 2://背面
+                    if (selectedPicture != null && selectedPicture.size() > 0){
+                        back = selectedPicture.get(0);
+                    }
+                    LoaderImage.getInstance(0).ImageLoaders(back,ivBack);
+                    break;
+            }
         }
     }
 }

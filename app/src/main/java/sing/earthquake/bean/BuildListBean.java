@@ -144,7 +144,34 @@ public class BuildListBean implements Serializable {
         private String ywgzz;
         private String sfjgkzjg;
         private String kzjgsj;
+        private String zhengmian;
+        private String cemian;
+        private String beimian;
         private long insertDate;
+
+        public String getZhengmian() {
+            return zhengmian;
+        }
+
+        public void setZhengmian(String zhengmian) {
+            this.zhengmian = zhengmian;
+        }
+
+        public String getCemian() {
+            return cemian;
+        }
+
+        public void setCemian(String cemian) {
+            this.cemian = cemian;
+        }
+
+        public String getBeimian() {
+            return beimian;
+        }
+
+        public void setBeimian(String beimian) {
+            this.beimian = beimian;
+        }
 
         public int getId() {
             return id;

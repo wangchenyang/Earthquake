@@ -413,7 +413,8 @@
                     android:id="@+id/iv_positive"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
-                    android:background="#e5e5e5" />
+                    android:background="#e5e5e5"
+                    android:scaleType="centerCrop" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -437,7 +438,8 @@
                     android:id="@+id/iv_side"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
-                    android:background="#e5e5e5" />
+                    android:background="#e5e5e5"
+                    android:scaleType="centerCrop" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -459,7 +461,8 @@
                     android:id="@+id/iv_back"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
-                    android:background="#e5e5e5" />
+                    android:background="#e5e5e5"
+                    android:scaleType="centerCrop" />
 
                 <TextView
                     android:layout_width="wrap_content"

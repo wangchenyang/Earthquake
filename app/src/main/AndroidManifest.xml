@@ -58,6 +58,12 @@
         <activity
             android:name=".ui.ActLocation"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".common.photo.SelectPictureActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".common.photo.ActPreViewIcon"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
