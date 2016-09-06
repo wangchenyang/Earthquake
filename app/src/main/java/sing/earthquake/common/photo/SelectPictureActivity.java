@@ -271,7 +271,7 @@ public class SelectPictureActivity extends BaseActivity {
         }
     }
 
-    public void back(View v) {
+    public void finish(View v) {
         onBackPressed();
     }
 

@@ -75,7 +75,6 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void init() {
-        context.startService(new Intent(context,MyService.class));
         isFirst = true;
         TextView tvTitle = (TextView) findViewById(R.id.tv_title);
         type = getIntent().getExtras().getInt("type",0);
@@ -1005,7 +1004,7 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
      */
     public void chooseImage(int type){
         Intent intent = new Intent(context, SelectPictureActivity.class);
-        intent.putExtra(SelectPictureActivity.KEY_RESLUT, SelectPictureActivity.ALL);
+        intent.putExtra(SelectPictureActivity.KEY_RESLUT, SelectPictureActivity.PHOTOALBUM);
         intent.putExtra(SelectPictureActivity.INTENT_MAX_NUM, 1);
         startActivityForResult(intent, type);
     }
