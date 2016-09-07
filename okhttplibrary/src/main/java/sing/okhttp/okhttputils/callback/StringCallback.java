@@ -2,6 +2,7 @@ package sing.okhttp.okhttputils.callback;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -40,6 +41,7 @@ public class StringCallback extends AbsCallback<String> {
         super.onError(isFromCache, call, response, e);
         if (dialog != null && dialog.isShowing()){
             dialog.dismiss();
+            Toast.makeText(context, "操作失败", Toast.LENGTH_SHORT).show();
         }
     }
 
