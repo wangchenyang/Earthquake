@@ -151,7 +151,13 @@ public class BuildListBean implements Serializable {
         private String beimian;
         private long insertDate;
 
+        /**
+         * @return
+         */
         public String getZhengmian() {
+            if (CommonUtil.isEmpty(zhengmian)){
+                return "";
+            }
             return zhengmian;
         }
 
@@ -160,6 +166,9 @@ public class BuildListBean implements Serializable {
         }
 
         public String getCemian() {
+            if (CommonUtil.isEmpty(cemian)){
+                return "";
+            }
             return cemian;
         }
 
@@ -168,6 +177,9 @@ public class BuildListBean implements Serializable {
         }
 
         public String getBeimian() {
+            if (CommonUtil.isEmpty(beimian)){
+                return "";
+            }
             return beimian;
         }
 
