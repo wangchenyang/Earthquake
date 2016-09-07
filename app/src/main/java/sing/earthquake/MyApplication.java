@@ -10,6 +10,9 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import sing.earthquake.common.MyPreference;
 import sing.okhttp.okhttputils.OkHttpUtils;
 import sing.okhttp.okhttputils.cookie.store.PersistentCookieStore;
@@ -67,6 +70,15 @@ public class MyApplication extends Application {
                 .setCookieStore(new PersistentCookieStore())                       //cookie持久化存储，如果cookie不过期，则一直有效
                 .addCommonHeaders(headers)                                         //设置全局公共头
                 .addCommonParams(params);                                          //设置全局公共参数
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+//                .addInterceptor(new LoggerInterceptor("TAG"))
+                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
+                .readTimeout(10000L, TimeUnit.MILLISECONDS)
+                        //其他配置
+                .build();
+
+        com.zhy.http.okhttp.OkHttpUtils.initClient(okHttpClient);
     }
 
     /**

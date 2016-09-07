@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.zhy.http.okhttp.callback.Callback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -1095,58 +1096,69 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
         }else if (type == 1){//修改
             url = Urls.modify;
         }
-        OkHttpUtils.post(url)
-                .params("id", bean.getId())
-                .params("jzmc", bean.getJzmc()) //建筑物名称
-                .params("address", bean.getAddress())//详细地址
-                .params("postcode", bean.getPostcode())//邮政编码
-                .params("ssjd", bean.getSsjd())//所属街道
-                .params("ssshequ", bean.getSsshequ())//所属社区
-                .params("ssxiaoqu", bean.getSsxiaoqu())//所属小区
-                .params("louzuobianhao",bean.getLouzuobianhao())//楼座编号
-                .params("jzwgd",bean.getJzwgd())//建筑物高度
-                .params("dsjzcs",bean.getDsjzcs())//地上楼层数
-                .params("dxjzcs",bean.getDxjzcs())//地下楼层数
-                .params("sjdw",bean.getSjdw())//设计单位
-                .params("jsdw",bean.getJsdw())//建设单位
-                .params("sgdw",bean.getSgdw())// 施工单位
-                .params("jldw",bean.getJldw())// 监理单位
-                .params("jgsj",bean.getJgsj())// 竣工时间
-                .params("jzmj",bean.getJzmj())// 建筑面积
-                .params("peopleCount",bean.getPeopleCount())// 办公人数
-                .params("tuzhi",bean.getTuzhi())//图纸
-                .params("yt",bean.getYt())//用途
-                .params("wenwudanwei",bean.getWenwudanwei())//文物单位
-                .params("kz",bean.getKz())//抗震防裂度
-                .params("fldj",bean.getFldj())//抗震设防分类等级
-                .params("guifan",bean.getGuifan())//设计规范
-                .params("jzjcxs",bean.getJzjcxs())//建筑基础形式
-                .params("jglx",bean.getJglx())//结构类型
-                .params("qtcl",bean.getQtcl())//墙体材料
-                .params("ywql",bean.getYwql())//有无圈梁
-                .params("ywgzz",bean.getYwgzz())//有无构造柱
-                .params("ldlx",bean.getLdlx())//楼顶类型
-                .params("cdlx",bean.getCdlx())//场地类别
-                .params("sgzl",bean.getSgzl())//设施和施工材料
-                .params("zzwxw",bean.getZzwxw())
-                .params("sfjgkzjg",bean.getSfjgkzjg())
-                .params("kzjgsj",bean.getKzjgsj())//抗震加固时间
-                .params("shifouweifang",bean.getShifouweifang())//是否危房
-                .params("kzjgsj",bean.getKzjgsj())//危房鉴定单位
-                .params("ztjglf",bean.getZtjglf())//主体结构是否有裂缝
-                .params("ztjglfqk",bean.getZtjglfqk())//主体结构裂缝情况
-                .params("pmgz",bean.getPmgz())
-                .params("lmgz",bean.getLmgz())
-                .params("lon", bean.getLon())
-                .params("lat",bean.getLat())
-                .params("zhengmian",new File(bean.getZhengmian()))
-                .params("cemian",new File(bean.getCemian()))
-                .params("beimian",new File(bean.getBeimian()))
-                .headers("token", MyApplication.preference().getString("token", ""))
-                .tag(this)                       // 请求的 tag, 主要用于取消对应的请求
-                .cacheKey("contentList")            // 设置当前请求的缓存key,建议每个不同功能的请求设置一个
-                .cacheMode(CacheMode.DEFAULT)    // 缓存模式，详细请看缓存介绍
-                .execute(new MyCallback(context));
+        List<File> files = new ArrayList<>();
+        files.add(new File(bean.getZhengmian()));
+//        OkHttpUtils.post(url)
+//                .params("id", bean.getId())
+//                .params("jzmc", bean.getJzmc())//建筑物名称
+//                .addFileParams("zhengmian", files)
+//                .params("address", bean.getAddress())//详细地址
+//                .params("postcode", bean.getPostcode())//邮政编码
+//                .params("ssjd", bean.getSsjd())//所属街道
+//                .params("ssshequ", bean.getSsshequ())//所属社区
+//                .params("ssxiaoqu", bean.getSsxiaoqu())//所属小区
+//                .params("louzuobianhao",bean.getLouzuobianhao())//楼座编号
+//                .params("jzwgd",bean.getJzwgd())//建筑物高度
+//                .params("dsjzcs",bean.getDsjzcs())//地上楼层数
+//                .params("dxjzcs",bean.getDxjzcs())//地下楼层数
+//                .params("sjdw",bean.getSjdw())//设计单位
+//                .params("jsdw",bean.getJsdw())//建设单位
+//                .params("sgdw",bean.getSgdw())// 施工单位
+//                .params("jldw",bean.getJldw())// 监理单位
+//                .params("jgsj",bean.getJgsj())// 竣工时间
+//                .params("jzmj",bean.getJzmj())// 建筑面积
+//                .params("peopleCount",bean.getPeopleCount())// 办公人数
+//                .params("tuzhi",bean.getTuzhi())//图纸
+//                .params("yt",bean.getYt())//用途
+//                .params("wenwudanwei",bean.getWenwudanwei())//文物单位
+//                .params("kz",bean.getKz())//抗震防裂度
+//                .params("fldj",bean.getFldj())//抗震设防分类等级
+//                .params("guifan",bean.getGuifan())//设计规范
+//                .params("jzjcxs",bean.getJzjcxs())//建筑基础形式
+//                .params("jglx",bean.getJglx())//结构类型
+//                .params("qtcl",bean.getQtcl())//墙体材料
+//                .params("ywql",bean.getYwql())//有无圈梁
+//                .params("ywgzz",bean.getYwgzz())//有无构造柱
+//                .params("ldlx",bean.getLdlx())//楼顶类型
+//                .params("cdlx",bean.getCdlx())//场地类别
+//                .params("sgzl",bean.getSgzl())//设施和施工材料
+//                .params("zzwxw",bean.getZzwxw())
+//                .params("sfjgkzjg",bean.getSfjgkzjg())
+//                .params("kzjgsj",bean.getKzjgsj())//抗震加固时间
+//                .params("shifouweifang",bean.getShifouweifang())//是否危房
+//                .params("kzjgsj",bean.getKzjgsj())//危房鉴定单位
+//                .params("ztjglf",bean.getZtjglf())//主体结构是否有裂缝
+//                .params("ztjglfqk",bean.getZtjglfqk())//主体结构裂缝情况
+//                .params("pmgz",bean.getPmgz())
+//                .params("lmgz",bean.getLmgz())
+//                .params("lon", bean.getLon())
+//                .params("lat",bean.getLat())
+//                .params("zhengmian",new File(bean.getZhengmian()))
+//                .params("cemian",new File(bean.getCemian()))
+//                .params("beimian",new File(bean.getBeimian()))
+//                .headers("token", MyApplication.preference().getString("token", ""))
+//                .tag(this)                       // 请求的 tag, 主要用于取消对应的请求
+//                .cacheKey("add_modify")            // 设置当前请求的缓存key,建议每个不同功能的请求设置一个
+//                .cacheMode(CacheMode.DEFAULT)    // 缓存模式，详细请看缓存介绍
+//                .execute(new MyCallback(context));
+
+        com.zhy.http.okhttp.OkHttpUtils.post()//
+                .url(url)
+                .addHeader("token", MyApplication.preference().getString("token", ""))//
+                .addParams("jzmc", bean.getJzmc()) //建筑物名称
+                .addFile("zhengmian", "test1", files.get(0))//
+                .build()//
+                .execute(new MyStringCallback());
     }
 
     private class MyCallback extends StringCallback {
@@ -1177,6 +1189,19 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private class MyStringCallback extends com.zhy.http.okhttp.callback.StringCallback {
+
+        @Override
+        public void onError(Call call, Exception e, int id) {
+            ToastUtil.showToast(e.getMessage());
+        }
+
+        @Override
+        public void onResponse(String response, int id) {
+            ToastUtil.showToast(response);
         }
     }
 }
