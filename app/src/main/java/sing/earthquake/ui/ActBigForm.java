@@ -1100,100 +1100,48 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
                 .params("jzmc", bean.getJzmc()) //建筑物名称
                 .params("address", bean.getAddress())//详细地址
                 .params("postcode", bean.getPostcode())//邮政编码
-                .params("", "")
-                .params("", "")
-                .params("", "")
-                .params("","")
-
-//        bean.setSsjd(getValus(textList.get(0)));//所属街道
-//        bean.setSsshequ(getValus(textList.get(1)));//所属社区
-//        bean.setSsxiaoqu(getValus(editList.get(3)));//所属小区
-
-
+                .params("ssjd", bean.getSsjd())//所属街道
+                .params("ssshequ", bean.getSsshequ())//所属社区
+                .params("ssxiaoqu", bean.getSsxiaoqu())//所属小区
+                .params("louzuobianhao",bean.getLouzuobianhao())//楼座编号
+                .params("jzwgd",bean.getJzwgd())//建筑物高度
+                .params("dsjzcs",bean.getDsjzcs())//地上楼层数
+                .params("dxjzcs",bean.getDxjzcs())//地下楼层数
+                .params("sjdw",bean.getSjdw())//设计单位
+                .params("jsdw",bean.getJsdw())//建设单位
+                .params("sgdw",bean.getSgdw())// 施工单位
+                .params("jldw",bean.getJldw())// 监理单位
+                .params("jgsj",bean.getJgsj())// 竣工时间
+                .params("jzmj",bean.getJzmj())// 建筑面积
+                .params("peopleCount",bean.getPeopleCount())// 办公人数
+                .params("tuzhi",bean.getTuzhi())//图纸
+                .params("yt",bean.getYt())//用途
+                .params("wenwudanwei",bean.getWenwudanwei())//文物单位
+                .params("kz",bean.getKz())//抗震防裂度
+                .params("fldj",bean.getFldj())//抗震设防分类等级
+                .params("guifan",bean.getGuifan())//设计规范
+                .params("jzjcxs",bean.getJzjcxs())//建筑基础形式
+                .params("jglx",bean.getJglx())//结构类型
+                .params("qtcl",bean.getQtcl())//墙体材料
+                .params("ywql",bean.getYwql())//有无圈梁
+                .params("ywgzz",bean.getYwgzz())//有无构造柱
+                .params("ldlx",bean.getLdlx())//楼顶类型
+                .params("cdlx",bean.getCdlx())//场地类别
+                .params("sgzl",bean.getSgzl())//设施和施工材料
+                .params("zzwxw",bean.getZzwxw())
+                .params("sfjgkzjg",bean.getSfjgkzjg())
+                .params("kzjgsj",bean.getKzjgsj())//抗震加固时间
+                .params("shifouweifang",bean.getShifouweifang())//是否危房
+                .params("kzjgsj",bean.getKzjgsj())//危房鉴定单位
+                .params("ztjglf",bean.getZtjglf())//主体结构是否有裂缝
+                .params("ztjglfqk",bean.getZtjglfqk())//主体结构裂缝情况
+                .params("pmgz",bean.getPmgz())
+                .params("lmgz",bean.getLmgz())
                 .params("lon", bean.getLon())
                 .params("lat",bean.getLat())
-                .params("zhengmian",new File(positive))
-
-//        bean.setLouzuobianhao(getValus(editList.get(4)));//楼座编号
-//        bean.setJzwgd(getValus(editList.get(5)));//建筑物高度
-//        bean.setDsjzcs(buildLayersUp);//地上楼层数
-//        bean.setDxjzcs(buildLayersDown);//地下楼层数
-//        bean.setSjdw(getValus(editList.get(6)));//设计单位
-//        bean.setJsdw(getValus(editList.get(7)));//建设单位
-//        bean.setSgdw(getValus(editList.get(8)));// 施工单位
-//        bean.setJldw(getValus(editList.get(9)));// 监理单位
-//        bean.setJgsj(getValus(editList.get(10)));// 竣工时间
-//        bean.setJzmj(getValus(editList.get(11)));// 建筑面积
-//        bean.setPeopleCount(getValus(editList.get(12)));// 办公人数
-//        if (radioList.get(0).isChecked()){
-//            bean.setTuzhi("有");
-//        }else if (radioList.get(1).isChecked()){
-//            bean.setTuzhi("无");
-//        }else{
-//            bean.setTuzhi("");
-//        }
-//        bean.setYt(getValus(textList.get(3)));//用途
-//
-//        if (radioList.get(2).isChecked()){//文物单位
-//            bean.setWenwudanwei("否");
-//        }else if (radioList.get(3).isChecked()){
-//            bean.setWenwudanwei(getValus(textList.get(4)));
-//        }
-//        bean.setKz(getValus(textList.get(5)));//抗震防裂度
-//        bean.setFldj(getValus(textList.get(6)));//抗震设防分类等级
-//        bean.setGuifan(getValus(textList.get(7)));//设计规范
-//        bean.setJzjcxs(getValus(textList.get(8)));//建筑基础形式
-//        bean.setJglx(getValus(textList.get(9)));//结构类型
-//        bean.setQtcl(getValus(textList.get(10)));//墙体材料
-//        if (radioList.get(4).isChecked()){
-//            bean.setYwql("有圈梁");
-//        }else if (radioList.get(5).isChecked()){
-//            bean.setYwql("无圈梁");
-//        }
-//        if (radioList.get(6).isChecked()){
-//            bean.setYwgzz("有构造柱");
-//        }else if (radioList.get(7).isChecked()){
-//            bean.setYwgzz("无构造柱");
-//        }
-//        bean.setLdlx(getValus(textList.get(11)));//楼顶类型
-//        bean.setCdlx(getValus(textList.get(12)));//场地类别
-//        bean.setSgzl(getValus(textList.get(13)));//设施和施工材料
-//        if (radioList.get(8).isChecked()){
-//            bean.setZzwxw("无");
-//        }else if (radioList.get(9).isChecked()){
-//            bean.setZzwxw(getValus(textList.get(14)));
-//        }
-//        if (radioList.get(10).isChecked()){
-//            bean.setSfjgkzjg("否");
-//        }else if (radioList.get(11).isChecked()){
-//            bean.setSfjgkzjg("是");
-//        }
-//        bean.setKzjgsj(getValus(editList.get(13)));//抗震加固时间
-//        if (radioList.get(12).isChecked()){//是否危房
-//            bean.setShifouweifang("否");
-//        }else if (radioList.get(13).isChecked()){
-//            bean.setShifouweifang("是");
-//        }
-//        bean.setKzjgsj(getValus(editList.get(14)));//危房鉴定单位
-//        if (radioList.get(14).isChecked()){//主体结构是否有裂缝
-//            bean.setZtjglf("无");
-//        }else if (radioList.get(15).isChecked()){
-//            bean.setZtjglf(getValus(textList.get(15)));
-//        }
-//        bean.setZtjglfqk(getValus(editList.get(15)));//主体结构裂缝情况
-//        if (radioList.get(16).isChecked()){
-//            bean.setPmgz("是");
-//        }else if (radioList.get(17).isChecked()){
-//            bean.setPmgz("否");
-//        }
-//        if (radioList.get(18).isChecked()){
-//            bean.setLmgz("是");
-//        }else if (radioList.get(19).isChecked()){
-//            bean.setLmgz("否");
-//        }
-//        bean.setZhengmian(positive);
-//        bean.setCemian(side);
-//        bean.setBeimian(back);
+                .params("zhengmian",new File(bean.getZhengmian()))
+                .params("cemian",new File(bean.getCemian()))
+                .params("beimian",new File(bean.getBeimian()))
                 .headers("token", MyApplication.preference().getString("token", ""))
                 .tag(this)                       // 请求的 tag, 主要用于取消对应的请求
                 .cacheKey("contentList")            // 设置当前请求的缓存key,建议每个不同功能的请求设置一个
