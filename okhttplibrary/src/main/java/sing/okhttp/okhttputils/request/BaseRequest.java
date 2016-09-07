@@ -1,6 +1,7 @@
 package sing.okhttp.okhttputils.request;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import sing.okhttp.okhttputils.OkHttpUtils;
 import sing.okhttp.okhttputils.cache.CacheEntity;
@@ -169,7 +170,10 @@ public abstract class BaseRequest<R extends BaseRequest> {
 
     @SuppressWarnings("unchecked")
     public R params(String key, String value) {
-        params.put(key, value);
+        if (value != null && !value.equals("") && !value.equals("null")){
+            params.put(key, value);
+            Log.e("OkHttpUtils: ", key + " : " + value);
+        }
         return (R) this;
     }
 
@@ -181,7 +185,10 @@ public abstract class BaseRequest<R extends BaseRequest> {
 
     @SuppressWarnings("unchecked")
     public R params(String key, File file) {
-        params.put(key, file);
+        if (file != null && !file.equals("") && !file.equals("null")){
+            params.put(key, file);
+            Log.e("OkHttpUtils: ", key + " : " + file);
+        }
         return (R) this;
     }
 

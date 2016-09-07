@@ -3,6 +3,8 @@ package sing.earthquake.bean;
 import java.io.Serializable;
 import java.util.List;
 
+import sing.earthquake.util.CommonUtil;
+
 public class BuildListBean implements Serializable {
 
     /**
@@ -174,6 +176,8 @@ public class BuildListBean implements Serializable {
         }
 
         public String getId() {
+            if (CommonUtil.isEmpty(id))
+                return "";
             return id;
         }
 

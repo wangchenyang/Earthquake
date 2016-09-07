@@ -26,6 +26,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -1096,15 +1097,23 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
         }
         OkHttpUtils.post(url)
                 .params("id", bean.getId())
-                .params("lon",bean.getLon())
-                .params("lat",bean.getLat())
-                .params("jzmc",bean.getJzmc())
-//        bean.setJzmc(getValus(editList.get(0)));//建筑物名称
-//        bean.setAddress(getValus(editList.get(1)));//详细地址
-//        bean.setPostcode(getValus(editList.get(2)));//邮政编码
+                .params("jzmc", bean.getJzmc()) //建筑物名称
+                .params("address", bean.getAddress())//详细地址
+                .params("postcode", bean.getPostcode())//邮政编码
+                .params("", "")
+                .params("", "")
+                .params("", "")
+                .params("","")
+
 //        bean.setSsjd(getValus(textList.get(0)));//所属街道
 //        bean.setSsshequ(getValus(textList.get(1)));//所属社区
 //        bean.setSsxiaoqu(getValus(editList.get(3)));//所属小区
+
+
+                .params("lon", bean.getLon())
+                .params("lat",bean.getLat())
+                .params("zhengmian",new File(positive))
+
 //        bean.setLouzuobianhao(getValus(editList.get(4)));//楼座编号
 //        bean.setJzwgd(getValus(editList.get(5)));//建筑物高度
 //        bean.setDsjzcs(buildLayersUp);//地上楼层数
@@ -1208,7 +1217,8 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
                 String msg = json.optString("msg");
                 int code = json.optInt("code");//失败才有
                 if ("true".equals(status)) {
-
+                    ToastUtil.showToast("操作成功");
+                    finish();
                 } else {
                     if (9430 == code) { //请重新登陆
 
