@@ -71,14 +71,6 @@ public class MyApplication extends Application {
                 .addCommonHeaders(headers)                                         //设置全局公共头
                 .addCommonParams(params);                                          //设置全局公共参数
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-//                .addInterceptor(new LoggerInterceptor("TAG"))
-                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
-                .readTimeout(10000L, TimeUnit.MILLISECONDS)
-                        //其他配置
-                .build();
-
-        com.zhy.http.okhttp.OkHttpUtils.initClient(okHttpClient);
     }
 
     /**

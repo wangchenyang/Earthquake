@@ -1,16 +1,17 @@
 package sing.earthquake.ui;
 
 import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.support.annotation.NonNull;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -20,16 +21,17 @@ import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.zhy.http.okhttp.callback.Callback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Request;
@@ -38,20 +40,17 @@ import sing.earthquake.MyApplication;
 import sing.earthquake.R;
 import sing.earthquake.adapter.StreetAdapter;
 import sing.earthquake.bean.BottomMenuBean;
-import sing.earthquake.bean.BuildListBean;
 import sing.earthquake.bean.BuildListBean.DataRowsBean;
 import sing.earthquake.common.BaseActivity;
 import sing.earthquake.common.Urls;
-import sing.earthquake.common.gson.GsonImpl;
 import sing.earthquake.common.photo.ActPreViewIcon;
 import sing.earthquake.common.photo.SelectPictureActivity;
 import sing.earthquake.common.streetinfo.StreetInfo;
 import sing.earthquake.util.CommonUtil;
 import sing.earthquake.util.FormUtil;
+import sing.earthquake.util.HttpUrlConnectionUtil;
 import sing.earthquake.util.LoaderImage;
 import sing.earthquake.util.ToastUtil;
-import sing.okhttp.okhttputils.OkHttpUtils;
-import sing.okhttp.okhttputils.cache.CacheMode;
 import sing.okhttp.okhttputils.callback.StringCallback;
 
 /**
@@ -139,7 +138,6 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
      * 初始化所有的List
      */
     private void initList() {
-
         textList = new ArrayList<>();
         editList = new ArrayList<>();
         radioList = new ArrayList<>();
@@ -1086,18 +1084,51 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
         }
     }
 
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Bundle b = msg.getData();
+            String result = b.getString("result");
+            ToastUtil.showToast(result);
+        }
+    };
     /**
      * 提交数据到服务器
      */
     private void request() {
-        String url = "";
-        if (type == 0){//添加
-            url = Urls.add;
-        }else if (type == 1){//修改
-            url = Urls.modify;
-        }
-        List<File> files = new ArrayList<>();
-        files.add(new File(bean.getZhengmian()));
+//        String url = "";
+//        if (type == 0){//添加
+//            url = Urls.add;
+//        }else if (type == 1){//修改
+//            url = Urls.modify;
+//        }
+
+        Map<String, String> headParams = new HashMap<>();
+        headParams.put("token", MyApplication.preference().getString("token", ""));
+
+        Map<String, String> params = new HashMap<>();
+        params.put("jzmc",bean.getJzmc());
+
+        Map<String, File> files = new HashMap<>();
+        files.put("zhengmian",new File(bean.getZhengmian()));
+
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    String result = HttpUrlConnectionUtil.post(Urls.add,headParams,params,files);
+                    Message msg = new Message();
+                    Bundle b = new Bundle();
+                    b.putSerializable("result", result);
+                    msg.setData(b);
+                    handler.sendMessage(msg);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+
 //        OkHttpUtils.post(url)
 //                .params("id", bean.getId())
 //                .params("jzmc", bean.getJzmc())//建筑物名称
@@ -1151,14 +1182,15 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
 //                .cacheKey("add_modify")            // 设置当前请求的缓存key,建议每个不同功能的请求设置一个
 //                .cacheMode(CacheMode.DEFAULT)    // 缓存模式，详细请看缓存介绍
 //                .execute(new MyCallback(context));
-
-        com.zhy.http.okhttp.OkHttpUtils.post()//
-                .url(url)
-                .addHeader("token", MyApplication.preference().getString("token", ""))//
-                .addParams("jzmc", bean.getJzmc()) //建筑物名称
-                .addFile("zhengmian", "test1", files.get(0))//
-                .build()//
-                .execute(new MyStringCallback());
+//
+//        com.zhy.http.okhttp.OkHttpUtils.post()//
+//                .url(url)
+//                .addParams("id", bean.getId())
+//                .addHeader("token", MyApplication.preference().getString("token", ""))//
+//                .addParams("jzmc", bean.getJzmc()) //建筑物名称
+//                .addFile("zhengmian", "zhengmian", files.get(0))//
+//                .build()//
+//                .execute(new MyStringCallback());
     }
 
     private class MyCallback extends StringCallback {
@@ -1189,19 +1221,6 @@ public class ActBigForm extends BaseActivity implements View.OnClickListener{
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }
-    }
-
-    private class MyStringCallback extends com.zhy.http.okhttp.callback.StringCallback {
-
-        @Override
-        public void onError(Call call, Exception e, int id) {
-            ToastUtil.showToast(e.getMessage());
-        }
-
-        @Override
-        public void onResponse(String response, int id) {
-            ToastUtil.showToast(response);
         }
     }
 }

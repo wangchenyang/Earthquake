@@ -119,7 +119,7 @@ public class FragMap extends Fragment {
 
         OkHttpUtils.get(Urls.contentList)     // 请求方式和请求url
                 .headers("token", MyApplication.preference().getString("token",""))
-                .params("totalRecord", "200")
+                .params("pageNumber", "500")
                 .tag(this)                       // 请求的 tag, 主要用于取消对应的请求
                 .cacheKey("contentList")            // 设置当前请求的缓存key,建议每个不同功能的请求设置一个
                 .cacheMode(CacheMode.DEFAULT)    // 缓存模式，详细请看缓存介绍
