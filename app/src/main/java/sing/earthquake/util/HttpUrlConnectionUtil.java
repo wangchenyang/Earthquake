@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
-
+//http://blog.csdn.net/devinteng/article/details/44809019
 public class HttpUrlConnectionUtil {
     public static String post(String actionUrl, Map<String, String> headParams,
                               Map<String, String> params,
